@@ -75,6 +75,9 @@ get_header(); ?>
         <div class="row">
             <div class="col-lg-12">
                 <div class="wrapper">
+                    <div class="main_heading">
+                        <h2>Novosti</h2>
+                    </div>
                     <div class="text">
                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
                     </div>
@@ -165,6 +168,9 @@ get_header(); ?>
     ?>
         <div class="home_sec_events" id="events">
             <div class="container">
+                <div class="main_heading">
+                    <h2>Novosti</h2>
+                </div>
                 <div class="big_wrapper_cal">
                     <div class="row">
                         <div class="col-lg-5 small-calendar">
@@ -377,7 +383,7 @@ get_header(); ?>
         const documentHeight = document.body.scrollHeight - window.innerHeight;
         const scrollPercentage = scrollPosition / documentHeight;
 
-        const colors = ['#fcc137', '#efc35d', '#e4c57d', '#d7c292', '#bfb49a', '#7f7f7f'];
+        const colors = ['#bcb9b2', '#d0c7b2', '#e7d6b0', '#f4dba3', '#f7d58a', '#fcc137'];
 
         const colorIndex = Math.floor(scrollPercentage * (colors.length - 1));
         const nextColorIndex = (colorIndex + 1) < colors.length ? colorIndex + 1 : colorIndex;

@@ -94,4 +94,27 @@
   $(".to-top").click(function () {
     $("html, body").animate({ scrollTop: 0 }, 800, "easeInOutExpo");
   });
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const headings = document.querySelectorAll(".main_heading h2");
+
+    const observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.parentElement.classList.add("in-view");
+          } else {
+            entry.target.parentElement.classList.remove("in-view");
+          }
+        });
+      },
+      {
+        threshold: 0.1, // 10% od elementa mora biti vidljivo prije nego što se klasa primijeni
+      }
+    );
+
+    headings.forEach((heading) => {
+      observer.observe(heading);
+    });
+  });
 })(jQuery);

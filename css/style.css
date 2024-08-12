@@ -6,6 +6,33 @@ body {
   font-size: 18px;
 }
 
+.main_heading {
+  margin-bottom: 30px;
+}
+.main_heading h2 {
+  font-size: 70px;
+  color: #7f7f7f;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  position: relative;
+  font-weight: 700;
+}
+.main_heading h2:after {
+  content: "";
+  position: absolute;
+  height: 7px;
+  background: #7f7f7f;
+  bottom: -8px;
+  left: 0;
+  width: 112px;
+  transition: 1.9s width, 1.9s background-color;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.main_heading.in-view h2:after {
+  width: 220px;
+  background: #fcc137;
+}
+
 .logo a img {
   width: 260px;
   position: absolute;
@@ -992,6 +1019,12 @@ body.single-blog-details .menu-item-34 a {
 .home_sec_events .con_wrap .main_title {
   margin-top: 76px;
   margin-bottom: 30px;
+  max-width: 550px;
+  margin: 30px auto;
+}
+
+.home_sec_events .con_wrap .main_title h2 {
+  font-size: 20px;
 }
 .home_sec_events .event_box .image {
   margin-bottom: 20px;
@@ -1007,12 +1040,12 @@ body.single-blog-details .menu-item-34 a {
 }
 
 .event_box {
-  transition: transform 0.5s ease; /* Podesi trajanje i brzinu animacije po želji */
+  transition: transform 0.5s ease; /* Podesi trajanje i brzinu animacije po Å¾elji */
   transform: translateX(0);
 }
 
 .event_box.slide-out {
-  transform: translateX(2000px); /* Pomakni na desno izvan vidnog područja */
+  transform: translateX(2000px); /* Pomakni na desno izvan vidnog podruÄja */
 }
 
 /************************************************************************************************************/
