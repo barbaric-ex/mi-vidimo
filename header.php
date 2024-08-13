@@ -17,6 +17,7 @@
 
 	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/owlcarousel/owl.carousel.min.css">
 	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/owlcarousel/owl.theme.default.css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
 	<meta property="og:site_name" content="<?php echo get_bloginfo('name'); ?>">
 	<meta property="og:title" content="<?php echo get_bloginfo('name'); ?>" />
 	<meta property="og:image" itemprop="image" content="<?php echo get_template_directory_uri(); ?>/img/og-img.jpg">

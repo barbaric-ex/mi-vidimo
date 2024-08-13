@@ -78,11 +78,98 @@ get_header(); ?>
                     <div class="main_heading">
                         <h2>Novosti</h2>
                     </div>
-                    <div class="text">
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                    </div>
+
+
+
                 </div>
             </div>
+
+
+            <?php
+
+            function translate_date_to_croatian($date_string)
+            {
+                $english_months = array(
+                    'January',
+                    'February',
+                    'March',
+                    'April',
+                    'May',
+                    'June',
+                    'July',
+                    'August',
+                    'September',
+                    'October',
+                    'November',
+                    'December'
+                );
+                $croatian_months = array(
+                    'siječnja',
+                    'veljače',
+                    'ožujka',
+                    'travnja',
+                    'svibnja',
+                    'lipnja',
+                    'srpnja',
+                    'kolovoza',
+                    'rujna',
+                    'listopada',
+                    'studenog',
+                    'prosinca'
+                );
+                return str_replace($english_months, $croatian_months, $date_string);
+            }
+
+
+            $args = array(
+                'post_type' => 'novost',
+                'posts_per_page' => 3,
+            );
+            $loop = new WP_Query($args);
+            if ($loop->have_posts()) {
+                while ($loop->have_posts()) : $loop->the_post();
+                    $slika = get_field('slika');
+                    $kratki_text = get_field('kratki_text');
+                    $naslov = get_field('naslov');
+            ?>
+                    <div class="col-lg-4">
+                        <div class="news_wrap">
+                            <?php if ($slika) : ?>
+                                <div class="image" style="background-image: url(<?php echo esc_url($slika['sizes']['medium']); ?>);"></div>
+                            <?php endif; ?>
+
+                            <div class="text_wrap">
+
+                                <div class="datum">
+                                    <p><?php echo translate_date_to_croatian(date_i18n('j. F Y', strtotime(get_the_date()))); ?></p>
+                                </div>
+                                <?php if ($naslov) : ?>
+                                    <div class="title">
+                                        <h3><?php echo esc_html($naslov); ?></h3>
+                                    </div>
+                                <?php endif; ?>
+
+                                <?php if ($kratki_text) : ?>
+                                    <?php echo ($kratki_text); ?>
+                                <?php endif; ?>
+
+                                <div class="btn_wrap">
+                                    <a href="<?php the_permalink(); ?>">Pročitaj više</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            <?php
+                endwhile;
+            }
+            wp_reset_postdata();
+            ?>
+
+
+
+
+
+
         </div>
     </div>
 

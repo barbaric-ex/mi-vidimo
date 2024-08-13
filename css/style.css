@@ -7,7 +7,7 @@ body {
 }
 
 .main_heading {
-  margin-bottom: 30px;
+  margin-bottom: 60px;
 }
 .main_heading h2 {
   font-size: 70px;
@@ -1174,6 +1174,82 @@ body.single-blog-details .menu-item-34 a {
   padding: 30px 0;
 }
 
+.home_sec2 {
+}
+.home_sec2 .news_wrap {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+  max-width: 470px;
+  width: 100%;
+}
+.home_sec2 .news_wrap .image {
+  min-height: 265px;
+  background-position: center;
+  background-size: cover;
+  /* margin-bottom: 21px; */
+}
+.home_sec2 .news_wrap .text_wrap {
+  padding: 15px 10px 30px 10px;
+}
+
+.home_sec2 .news_wrap .text_wrap .datum {
+  font-size: 16px;
+}
+.home_sec2 .news_wrap .text_wrap .datum p {
+  margin: 0;
+}
+.home_sec2 .news_wrap .text_wrap p {
+}
+.home_sec2 .news_wrap .text_wrap .btn_wrap {
+  text-align: center;
+}
+.home_sec2 {
+  margin: 90px 0;
+}
+
+.home_sec2 .news_wrap .text_wrap .title {
+  margin: 5px 0 10px 0;
+}
+.home_sec2 .news_wrap .text_wrap .title h3 {
+  font-weight: 700;
+  color: #000;
+}
+
+.single_header {
+  min-height: 350px;
+  background-position: center;
+  background-size: cover;
+}
+.sing_sec2 .wrapper {
+  margin-top: 30px;
+  margin-bottom: 100px;
+}
+.sing_sec2 .wrapper .image {
+  min-height: 690px;
+  background-size: cover;
+  background-position: center;
+}
+.sing_sec2 .wrapper .text {
+  margin-top: 40px;
+}
+.sing_sec2 .wrapper .text p {
+}
+.sing_sec2 {
+}
+
+.gallery_wrap {
+  margin-top: 50px;
+}
+.sing_sec2 .gallery_wrap .image {
+  min-height: 300px;
+  max-width: 480px;
+  width: 100%;
+  background-position: center;
+  background-size: cover;
+  margin: auto;
+}
 /******************************************************/
 
 @media (min-width: 992px) {
