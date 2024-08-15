@@ -855,6 +855,11 @@ div.tr.space-b div.td {
 .search_icon .icone img {
   width: 100%;
   cursor: pointer;
+  transition: 0.3s;
+}
+
+.search_icon .icone img:hover {
+  opacity: 0.7;
 }
 
 .navbar-expand-lg .navbar-nav .nav-link {
@@ -1346,6 +1351,12 @@ body.single-blog-details .menu-item-34 a {
 .home_sec_events .con_wrap {
 }
 
+.home_sec_events .con_wrap .title h3 {
+  font-family: "Sora";
+  font-weight: 700;
+  color: #000;
+}
+
 .home_sec_events .con_wrap .main_title {
   margin-top: 76px;
   margin-bottom: 30px;
@@ -1355,6 +1366,7 @@ body.single-blog-details .menu-item-34 a {
 
 .home_sec_events .con_wrap .main_title h2 {
   font-size: 20px;
+  color: #e45050;
 }
 .home_sec_events .event_box .image {
   margin-bottom: 20px;
@@ -1621,6 +1633,7 @@ body.single-blog-details .menu-item-34 a {
 .footer {
   background: #000;
   padding: 60px 0;
+  margin-top: 75px;
 }
 .footer .wrap {
 }
@@ -1654,9 +1667,20 @@ body.single-blog-details .menu-item-34 a {
 .footer .wrap {
 }
 .footer .wrap .title {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 .footer .wrap .title h3 {
+  position: relative;
+}
+
+.footer .wrap .title h3:after {
+  content: "";
+  background: #fcc137;
+  width: 50px;
+  display: block;
+  height: 4px;
+  position: absolute;
+  bottom: -8px;
 }
 .footer .wrap.logo_wrap {
 }
