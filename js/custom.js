@@ -12,7 +12,7 @@
       if (target.length) {
         $("html, body").animate(
           {
-            scrollTop: target.offset().top - 56,
+            scrollTop: target.offset().top - 40,
           },
           1000,
           "easeInOutExpo"
@@ -78,6 +78,15 @@
         $(".dark-overly").removeClass("active");
       }
     });
+
+    $(".search-main-btn").click(function () {
+      $(".search-fixed-wrap").addClass("active");
+      $(".search-fixed-wrap input[type='text']").focus();
+    });
+
+    $(".close-btn-search").click(function () {
+      $(".search-fixed-wrap").removeClass("active");
+    });
   });
 
   $(".navbar .dropdown > a").click(function () {
@@ -115,6 +124,34 @@
 
     headings.forEach((heading) => {
       observer.observe(heading);
+    });
+  });
+
+  document.addEventListener("DOMContentLoaded", function () {
+    // Ukloni 'active' klasu sa svih li elemenata na početku
+    document.querySelectorAll(".navbar-nav li").forEach(function (item) {
+      item.classList.remove("active");
+    });
+
+    // Dodaj 'active' klasu na osnovu trenutnog hash dijela URL-a
+    const currentHash = window.location.hash;
+    if (currentHash) {
+      const activeLink = document.querySelector(
+        `.navbar-nav a[href="${currentHash}"]`
+      );
+      if (activeLink) {
+        activeLink.closest("li").classList.add("active");
+      }
+    }
+
+    // Dodaj 'active' klasu na klik na navigacijske linkove
+    document.querySelectorAll(".navbar-nav a").forEach(function (link) {
+      link.addEventListener("click", function () {
+        document.querySelectorAll(".navbar-nav li").forEach(function (item) {
+          item.classList.remove("active");
+        });
+        this.closest("li").classList.add("active");
+      });
     });
   });
 })(jQuery);

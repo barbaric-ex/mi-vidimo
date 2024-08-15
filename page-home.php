@@ -4,7 +4,7 @@ Template Name: Page Home
 */
 get_header(); ?>
 
-<div class="home_sec1" id="pocetna">
+<div class="home_sec1 section" id="pocetna">
 
     <div class="owl-carousel owl-theme header-slider">
 
@@ -70,7 +70,7 @@ get_header(); ?>
 
 
 
-<div class="home_sec2" id="novosti">
+<div class="home_sec2 section" id="novosti">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -175,9 +175,23 @@ get_header(); ?>
 
 </div>
 
-<div class="home_sec3" id="onama">
+<div class="home_sec3 section" id="onama">
     <div class="container">
         <div class="row">
+
+            <div class="col-lg-12">
+                <div class="main_heading">
+                    <h2>O Nama</h2>
+                </div>
+
+                <div class="text_area">
+                    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.</p>
+                </div>
+
+                <div class="main_heading subtitle">
+                    <h2>Naš Tim</h2>
+                </div>
+            </div>
 
             <div class="col-lg-3">
 
@@ -253,10 +267,10 @@ get_header(); ?>
 
 
     ?>
-        <div class="home_sec_events" id="events">
+        <div class="home_sec_events section" id="events">
             <div class="container">
                 <div class="main_heading">
-                    <h2>Novosti</h2>
+                    <h2>Događaji</h2>
                 </div>
                 <div class="big_wrapper_cal">
                     <div class="row">
@@ -470,7 +484,7 @@ get_header(); ?>
         const documentHeight = document.body.scrollHeight - window.innerHeight;
         const scrollPercentage = scrollPosition / documentHeight;
 
-        const colors = ['#bcb9b2', '#d0c7b2', '#e7d6b0', '#f4dba3', '#f7d58a', '#fcc137'];
+        const colors = ['#daddd8', '#d5e7c8', '#d3f2bc', '#abd78b', '#85bc5d', '#63b02b'];
 
         const colorIndex = Math.floor(scrollPercentage * (colors.length - 1));
         const nextColorIndex = (colorIndex + 1) < colors.length ? colorIndex + 1 : colorIndex;
@@ -504,6 +518,24 @@ get_header(); ?>
         return [r, g, b];
     }
 </script>
+
+<div class="home_lokacija" id="lokacija">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="map_mega_wrap">
+                    <div class="main_heading">
+                        <h2>Gdje se nalazimo</h2>
+                    </div>
+
+                    <div class="mapa">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5803.076328060768!2d17.795815097382278!3d43.34485238688282!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134b43b18de394db%3A0x1928f9d3a19dbf8e!2sBiskupski%20ordinarijat%20Mostar!5e0!3m2!1sen!2sba!4v1723715826372!5m2!1sen!2sba" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div></div>
 <br>

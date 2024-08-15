@@ -31,6 +31,18 @@
 
 <body id="page-top" <?php body_class(); ?>>
 	<div class="page-wrap">
+		<div class="search-fixed-wrap">
+			<div class="close-btn-search">
+				<img src="<?php echo get_template_directory_uri(); ?>/img/iconx.png">
+			</div>
+			<div class="search-wrap">
+				<form role="search" method="get" action="/" id="searchform">
+
+					<input type="text" value="" name="s" id="s" placeholder="Pretraži...">
+
+				</form>
+			</div>
+		</div>
 		<nav class="navbar navbar-expand-lg navbar-default fixed-top " id="mainNav">
 			<div class="container">
 				<div class="menu-btn"><button class="c-hamburger c-hamburger--htx"><span>toggle menu</span> </button></div>
@@ -48,6 +60,12 @@
 						'walker'          => new WP_Bootstrap_Navwalker(),
 					));
 					?>
+				</div>
+
+				<div class="search_icon">
+					<div class="icone search-main-btn">
+						<img src="<?php echo get_template_directory_uri(); ?>/img/menue-bar-loupe-white.svg" alt="">
+					</div>
 				</div>
 			</div>
 		</nav>
