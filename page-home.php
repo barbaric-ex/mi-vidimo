@@ -4,6 +4,8 @@ Template Name: Page Home
 */
 get_header(); ?>
 
+
+
 <div class="home_sec1 section" id="pocetna">
 
     <div class="owl-carousel owl-theme header-slider">
@@ -126,40 +128,41 @@ get_header(); ?>
                 'posts_per_page' => 3,
             );
             $loop = new WP_Query($args);
+            $i = 1;
             if ($loop->have_posts()) {
                 while ($loop->have_posts()) : $loop->the_post();
                     $slika = get_field('slika');
                     $kratki_text = get_field('kratki_text');
                     $naslov = get_field('naslov');
+
             ?>
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 <?php if ($i == 3) : ?>col-md-12 <?php endif; ?>col-md-6">
                         <div class="news_wrap">
                             <?php if ($slika) : ?>
-                                <div class="image" style="background-image: url(<?php echo esc_url($slika['sizes']['medium']); ?>);"></div>
+                                <a href="<?php the_permalink(); ?>">
+                                    <div class="image" style="background-image: url(<?php echo esc_url($slika['sizes']['medium']); ?>);">
+
+                                        <div class="overlay">
+
+                                        </div>
+                                        <div class="iner_image_content">
+                                            <div class="date_image">
+                                                <p><?php echo translate_date_to_croatian(date_i18n('j. F Y', strtotime(get_the_date()))); ?></p>
+                                            </div>
+                                            <?php if ($naslov) : ?>
+                                                <div class="title_image">
+                                                    <h3><?php echo esc_html($naslov); ?></h3>
+                                                </div>
+                                            <?php endif; ?>
+                                        </div>
+                                    </div>
+                                </a>
                             <?php endif; ?>
 
-                            <div class="text_wrap">
 
-                                <div class="datum">
-                                    <p><?php echo translate_date_to_croatian(date_i18n('j. F Y', strtotime(get_the_date()))); ?></p>
-                                </div>
-                                <?php if ($naslov) : ?>
-                                    <div class="title">
-                                        <h3><?php echo esc_html($naslov); ?></h3>
-                                    </div>
-                                <?php endif; ?>
-
-                                <?php if ($kratki_text) : ?>
-                                    <?php echo ($kratki_text); ?>
-                                <?php endif; ?>
-
-                                <div class="btn_wrap">
-                                    <a href="<?php the_permalink(); ?>">Pročitaj više</a>
-                                </div>
-                            </div>
                         </div>
                     </div>
-            <?php
+            <?php $i++;
                 endwhile;
             }
             wp_reset_postdata();
@@ -193,7 +196,7 @@ get_header(); ?>
                 </div>
             </div>
 
-            <div class="col-lg-3">
+            <div class="col-lg-3 col-md-6">
 
                 <div class="wrap">
                     <div class="image_wrap" style="background-image: url(<?php echo get_template_directory_uri(); ?>/img/team1.jpg);">
@@ -224,7 +227,69 @@ get_header(); ?>
 
             </div>
 
-            <div class="col-lg-3">
+            <div class="col-lg-3 col-md-6">
+
+                <div class="wrap">
+                    <div class="image_wrap" style="background-image: url(<?php echo get_template_directory_uri(); ?>/img/team1.jpg);">
+                        <div class="overlay">
+                            <div class="icon_img">
+                                <img src="<?php echo get_template_directory_uri(); ?>/img/logo1-removebg-preview.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text_wrap">
+                        <div class="name">
+                            Emil Bevanda
+                        </div>
+
+                        <div class="info_wrap">
+                            <a class="tel" href="#">+063 555 555</a>
+                            <a class="email" href="#">testmail@gmail.com</a>
+                        </div>
+
+
+                        <div class="social_icon_wrap">
+                            <a class="instagram" href="#"><img src="<?php echo get_template_directory_uri(); ?>/img/header-icon-insatgram.svg" alt=""></a>
+                            <a class="facebook" href="#"><img src="<?php echo get_template_directory_uri(); ?>/img/header-icon-facebook.svg" alt=""></a>
+                            <a class="youtube" href="#"><img src="<?php echo get_template_directory_uri(); ?>/img/youtube.svg" alt=""></a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="wrap">
+                    <div class="image_wrap" style="background-image: url(<?php echo get_template_directory_uri(); ?>/img/team1.jpg);">
+                        <div class="overlay">
+                            <div class="icon_img">
+                                <img src="<?php echo get_template_directory_uri(); ?>/img/logo1-removebg-preview.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text_wrap">
+                        <div class="name">
+                            Emil Bevanda
+                        </div>
+
+                        <div class="info_wrap">
+                            <a class="tel" href="#">+063 555 555</a>
+                            <a class="email" href="#">testmail@gmail.com</a>
+                        </div>
+
+
+                        <div class="social_icon_wrap">
+                            <a class="instagram" href="#"><img src="<?php echo get_template_directory_uri(); ?>/img/header-icon-insatgram.svg" alt=""></a>
+                            <a class="facebook" href="#"><img src="<?php echo get_template_directory_uri(); ?>/img/header-icon-facebook.svg" alt=""></a>
+                            <a class="youtube" href="#"><img src="<?php echo get_template_directory_uri(); ?>/img/youtube.svg" alt=""></a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
 
                 <div class="wrap">
                     <div class="image_wrap" style="background-image: url(<?php echo get_template_directory_uri(); ?>/img/team1.jpg);">

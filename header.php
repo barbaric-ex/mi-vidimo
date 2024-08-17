@@ -31,6 +31,16 @@
 
 <body id="page-top" <?php body_class(); ?>>
 	<div class="page-wrap">
+
+		<div class="fixed_info">
+			<div class="phone info_gl">
+				<a href="#"><img src="<?php echo get_template_directory_uri(); ?>/img/phone-round1.png" alt=""></a>
+			</div>
+
+			<div class="email info_gl">
+				<a href="mailto:mladi@biskupija-mostar.ba"><img src="<?php echo get_template_directory_uri(); ?>/img/email-round1.png" alt=""></a>
+			</div>
+		</div>
 		<div class="search-fixed-wrap">
 			<div class="close-btn-search">
 				<img src="<?php echo get_template_directory_uri(); ?>/img/iconx.png">
@@ -60,6 +70,16 @@
 						'walker'          => new WP_Bootstrap_Navwalker(),
 					));
 					?>
+
+					<div class="search-wrap search-big-wrap">
+						<form role="search" method="get" id="searchform" class="searchform" action="/">
+							<input type="text" name="s" placeholder="Pretraži">
+							<div class="search-icon">
+								<img src="<?php echo get_template_directory_uri(); ?>/img/menue-bar-loupe-white.svg">
+
+							</div>
+						</form>
+					</div>
 				</div>
 
 				<div class="search_icon">

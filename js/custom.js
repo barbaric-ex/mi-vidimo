@@ -40,14 +40,52 @@
   });
 
   $(document).ready(function () {
-    $(".home_sec3 .wrap").on("mouseenter", ".image_wrap", function () {
-      $(this).siblings(".text_wrap").stop(true, true).slideDown(300);
-      $(this).css("border-radius", "0"); // Makni border-radius na hover
+    $(".navbar-nav li a").click(function () {
+      var windowWidth = $(window).width();
+      if (windowWidth < 991) {
+        $(".navbar-collapse").removeClass("navbar250");
+        $(".c-hamburger").removeClass("is-active");
+        $(".dark-overly").removeClass("active");
+      }
     });
 
-    $(".home_sec3 .wrap").on("mouseleave", function () {
-      $(this).find(".text_wrap").stop(true, true).slideUp(300);
-      $(this).find(".image_wrap").css("border-radius", "20px"); // Vrati border-radius kad miš napusti wrap
+    function handleDesktopEvents() {
+      $(".home_sec3 .wrap").on("mouseenter", ".image_wrap", function () {
+        $(this).siblings(".text_wrap").stop(true, true).slideDown(300);
+        $(this).css("border-radius", "0"); // Makni border-radius na hover
+      });
+
+      $(".home_sec3 .wrap").on("mouseleave", function () {
+        $(this).find(".text_wrap").stop(true, true).slideUp(300);
+        $(this).find(".image_wrap").css("border-radius", "20px"); // Vrati border-radius kad miš napusti wrap
+      });
+    }
+
+    function handleMobileEvents() {
+      $(".home_sec3 .wrap").off("mouseenter mouseleave"); // Ukloni hover događaje
+
+      $(".home_sec3 .wrap").on("click", ".image_wrap", function () {
+        var $textWrap = $(this).siblings(".text_wrap");
+        $textWrap.stop(true, true).slideToggle(300); // Toggla otvaranje i zatvaranje
+
+        var currentRadius = $(this).css("border-radius");
+        $(this).css("border-radius", currentRadius === "0px" ? "20px" : "0"); // Toggla border-radius
+      });
+    }
+
+    function applyEvents() {
+      if ($(window).width() < 991) {
+        handleMobileEvents();
+      } else {
+        handleDesktopEvents();
+      }
+    }
+
+    applyEvents(); // Primijeni događaje pri učitavanju stranice
+
+    $(window).resize(function () {
+      $(".home_sec3 .wrap").off(); // Ukloni sve prethodno dodane događaje
+      applyEvents(); // Ponovno primijeni događaje prilikom promjene veličine prozora
     });
   });
 
