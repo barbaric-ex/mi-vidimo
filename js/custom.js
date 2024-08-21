@@ -195,131 +195,119 @@
 
   /******************************************* */
 
-  // Kod za glasovnu navigaciju
-  document.addEventListener("DOMContentLoaded", function () {
-    // Check if the browser supports the Web Speech API
-    if ("webkitSpeechRecognition" in window && "speechSynthesis" in window) {
-      const recognition = new webkitSpeechRecognition();
-      const synth = window.speechSynthesis; // SpeechSynthesis API
-      recognition.lang = "hr-HR"; // Set language to Croatian
-      recognition.continuous = true; // Keep listening until manually stopped
-      recognition.interimResults = false;
+ // Kod za glasovnu navigaciju
+document.addEventListener("DOMContentLoaded", function () {
+  // Check if the browser supports the Web Speech API
+  if ("webkitSpeechRecognition" in window && "speechSynthesis" in window) {
+    const recognition = new webkitSpeechRecognition();
+    const synth = window.speechSynthesis; // SpeechSynthesis API
+    recognition.lang = "hr-HR"; // Set language to Croatian
+    recognition.continuous = true; // Keep listening until manually stopped
+    recognition.interimResults = false;
 
-      let isListening = false;
+    let isListening = false;
 
-      // Function to start/stop the microphone
-      function toggleVoiceNavigation() {
-        const btnText = document.querySelector(".inner_btn span");
+    // Function to start/stop the microphone
+    function toggleVoiceNavigation() {
+      const btnText = document.querySelector(".inner_btn span");
 
         if (isListening) {
           recognition.stop();
           isListening = false;
           btnText.textContent = "Upali glasovnu navigaciju";
         } else {
-          recognition.start();
-          isListening = true;
-          btnText.textContent = "Ugasi glasovnu navigaciju";
+          // Speak the welcome message
+          const welcomeMessage = "Dobrodošli na web stranicu Mi vidimo.";
+          const utterance = new SpeechSynthesisUtterance(welcomeMessage);
+          utterance.lang = "hr-HR";
+          utterance.onend = () => {
+            // Start speech recognition after the message is spoken
+            recognition.start();
+            isListening = true;
+            btnText.textContent = "Ugasi glasovnu navigaciju";
+          };
+          synth.speak(utterance);
         }
       }
 
-      // Handle voice commands
-      recognition.onresult = function (event) {
-        const transcript = event.results[event.results.length - 1][0].transcript
-          .trim()
-          .toLowerCase();
+    // Handle voice commands
+    recognition.onresult = function (event) {
+      const transcript = event.results[event.results.length - 1][0].transcript
+        .trim()
+        .toLowerCase();
 
-        // Voice commands
-        if (
-          [
-            "novosti",
-            "vijesti",
-            "novost",
-            "vijest",
-            "zadnje vijesti",
-            "zadnje novosti",
-          ].includes(transcript)
-        ) {
-          document
-            .getElementById("novosti")
-            .scrollIntoView({ behavior: "smooth" });
-        } else if (["o nama", "naš tim", "tim"].includes(transcript)) {
-          document
-            .getElementById("onama")
-            .scrollIntoView({ behavior: "smooth" });
-        } else if (
-          [
-            "događaji",
-            "eventi",
-            "događanja",
-            "kalendar",
-            "skori događaji",
-          ].includes(transcript)
-        ) {
-          document
-            .getElementById("events")
-            .scrollIntoView({ behavior: "smooth" });
-        } else if (
-          ["mapa", "karta", "lokacija", "gdje se nalazimo"].includes(transcript)
-        ) {
-          document
-            .getElementById("lokacija")
-            .scrollIntoView({ behavior: "smooth" });
-        } else if (
-          [
-            "kontakt",
-            "info",
-            "adresa",
-            "broj telefona",
-            "email adresa",
-            "društvene mreže",
-            "socijalne mreže",
-          ].includes(transcript)
-        ) {
-          document
-            .getElementById("footer")
-            .scrollIntoView({ behavior: "smooth" });
-        } else if (
-          [
-            "početna",
-            "početak",
-            "vrh stranice",
-            "vrati na vrh",
-            "vrati na početak",
-            "početna stranica",
-          ].includes(transcript)
-        ) {
-          document
-            .getElementById("pocetna")
-            .scrollIntoView({ behavior: "smooth" });
-        } else if (
-          [
-            "pozovi",
-            "zovni",
-            "zovi",
-            "okreni broj",
-            "kontaktiraj",
-            "pozovi broj telefona",
-          ].includes(transcript)
-        ) {
-          document.querySelector(".linkovi .tel").click();
-        } else if (
-          ["pošalji email", "email", "mail", "pošalji poruku"].includes(
-            transcript
-          )
-        ) {
-          document.querySelector(".linkovi .email").click();
-        }
-      };
-
-      // Add click event to the button if it exists
-      const voiceOpenBtn = document.querySelector(".voice_open_btn");
-      if (voiceOpenBtn) {
-        voiceOpenBtn.addEventListener("click", toggleVoiceNavigation);
-      } else {
-        console.warn("Element s klasom .voice_open_btn nije pronađen.");
+      // Voice commands
+      if (
+        [
+          "novosti",
+          "vijesti",
+          "novost",
+          "vijest",
+          "zadnje vijesti",
+          "zadnje novosti",
+        ].includes(transcript)
+      ) {
+        document.getElementById("novosti").scrollIntoView({ behavior: "smooth" });
+      } else if (["o nama", "naš tim", "tim"].includes(transcript)) {
+        document.getElementById("onama").scrollIntoView({ behavior: "smooth" });
+      } else if (
+        ["događaji", "eventi", "događanja", "kalendar", "skori događaji"].includes(transcript)
+      ) {
+        document.getElementById("events").scrollIntoView({ behavior: "smooth" });
+      } else if (
+        ["mapa", "karta", "lokacija", "gdje se nalazimo"].includes(transcript)
+      ) {
+        document.getElementById("lokacija").scrollIntoView({ behavior: "smooth" });
+      } else if (
+        [
+          "kontakt",
+          "info",
+          "adresa",
+          "broj telefona",
+          "email adresa",
+          "društvene mreže",
+          "socijalne mreže",
+        ].includes(transcript)
+      ) {
+        document.getElementById("footer").scrollIntoView({ behavior: "smooth" });
+      } else if (
+        [
+          "početna",
+          "početak",
+          "vrh stranice",
+          "vrati na vrh",
+          "vrati na početak",
+          "početna stranica",
+        ].includes(transcript)
+      ) {
+        document.getElementById("pocetna").scrollIntoView({ behavior: "smooth" });
+      } else if (
+        [
+          "pozovi",
+          "zovni",
+          "zovi",
+          "okreni broj",
+          "kontaktiraj",
+          "pozovi broj telefona",
+        ].includes(transcript)
+      ) {
+        document.querySelector(".linkovi .tel").click();
+      } else if (
+        ["pošalji email", "email", "mail", "pošalji poruku"].includes(transcript)
+      ) {
+        document.querySelector(".linkovi .email").click();
       }
+    };
+
+    // Add click event to the button if it exists
+    const voiceOpenBtn = document.querySelector(".voice_open_btn");
+    if (voiceOpenBtn) {
+      voiceOpenBtn.addEventListener("click", toggleVoiceNavigation);
     } else {
-      alert("Vaš preglednik ne podržava glasovnu navigaciju.");
+      console.warn("Element s klasom .voice_open_btn nije pronađen.");
     }
-  });
+  } else {
+    alert("Vaš preglednik ne podržava glasovnu navigaciju.");
+  }
+});
 })(jQuery);
