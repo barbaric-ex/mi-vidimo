@@ -1912,7 +1912,10 @@ body.single-blog-details .menu-item-34 a {
 @media (max-height: 560px) {
 }
 
-@media (max-width: 1700px) {
+@media (max-width: 1750px) {
+  .container{
+    max-width: 1151px;
+}
 }
 
 @media (max-width: 1600px) {
