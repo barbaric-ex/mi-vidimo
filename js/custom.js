@@ -211,16 +211,24 @@ document.addEventListener("DOMContentLoaded", function () {
     function toggleVoiceNavigation() {
       const btnText = document.querySelector(".inner_btn span");
 
-      if (isListening) {
-        recognition.stop();
-        isListening = false;
-        btnText.textContent = "Upali glasovnu navigaciju";
-      } else {
-        recognition.start();
-        isListening = true;
-        btnText.textContent = "Ugasi glasovnu navigaciju";
+        if (isListening) {
+          recognition.stop();
+          isListening = false;
+          btnText.textContent = "Upali glasovnu navigaciju";
+        } else {
+          // Speak the welcome message
+          const welcomeMessage = "Dobrodošli na web stranicu Mi vidimo.";
+          const utterance = new SpeechSynthesisUtterance(welcomeMessage);
+          utterance.lang = "hr-HR";
+          utterance.onend = () => {
+            // Start speech recognition after the message is spoken
+            recognition.start();
+            isListening = true;
+            btnText.textContent = "Ugasi glasovnu navigaciju";
+          };
+          synth.speak(utterance);
+        }
       }
-    }
 
     // Handle voice commands
     recognition.onresult = function (event) {
