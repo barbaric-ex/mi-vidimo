@@ -74,6 +74,13 @@ $galerija = get_field('galerija');
                     <?php endif; ?>
 
                     <div class="gallery_wrap">
+                        <?php
+                        $images = get_field('galerija');
+                        if ($images) : ?>
+                            <div class="main_heading">
+                                <h2>Galerija</h2>
+                            </div>
+                        <?php endif; ?>
                         <div class="owl-carousel owl-theme single-slider">
                             <?php
                             $images = get_field('galerija');
@@ -127,6 +134,119 @@ $galerija = get_field('galerija');
             </div>
         </div>
     </div>
+</div>
+
+<div class="home_sec2 section single_all_news" id="novosti">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="wrapper">
+
+                    <div class="main_heading wow fadeInUp" data-wow-delay="0.5s" data-wow-duration="0.6s">
+                        <h2>Ostale Novosti</h2>
+                    </div>
+
+
+
+
+
+
+
+                </div>
+            </div>
+
+            <div class="owl-carousel owl-theme news-slider">
+                <?php
+
+
+                $args = array(
+                    'post_type' => 'novost',
+                    'posts_per_page' => -1,
+                );
+                $loop = new WP_Query($args);
+
+                if ($loop->have_posts()) {
+                    while ($loop->have_posts()) : $loop->the_post();
+                        $slika = get_field('slika');
+                        $kratki_text = get_field('kratki_text');
+                        $naslov = get_field('naslov');
+
+                ?>
+
+
+
+                        <a href="<?php the_permalink(); ?>">
+
+                            <div class="news_wrap ">
+                                <?php if ($slika) : ?>
+                                    <div class="image" style="background-image: url(<?php echo esc_url($slika['sizes']['medium']); ?>);">
+
+                                        <div class="overlay">
+
+                                        </div>
+                                        <div class="iner_image_content">
+                                            <div class="date_image">
+                                                <p><?php echo translate_date_to_croatian(date_i18n('j. F Y', strtotime(get_the_date()))); ?></p>
+                                            </div>
+                                            <?php if ($naslov) : ?>
+                                                <div class="title_image">
+                                                    <h3><?php echo esc_html($naslov); ?></h3>
+                                                </div>
+                                            <?php endif; ?>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+
+
+                            </div>
+                        </a>
+
+
+                <?php
+                    endwhile;
+                }
+                wp_reset_postdata();
+                ?>
+
+                <script>
+                    $(document).ready(function() {
+                        $('.owl-carousel.news-slider').owlCarousel({
+
+                            loop: true,
+                            margin: 0,
+                            dots: false,
+                            autoplay: true,
+                            autoplaySpeed: 300,
+                            smartSpeed: 300,
+                            autoplayHoverPause: false,
+                            responsive: {
+                                0: {
+                                    items: 1,
+                                },
+                                800: {
+                                    items: 2,
+                                },
+                                1200: {
+                                    items: 3,
+                                }
+                            }
+
+
+                        });
+
+                    });
+                </script>
+            </div>
+
+
+
+
+
+
+
+        </div>
+    </div>
+
 </div>
 
 

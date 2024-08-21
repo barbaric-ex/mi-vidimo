@@ -5,71 +5,86 @@ Template Name: Page Home
 get_header(); ?>
 
 
-
-<div class="home_sec1 section" id="pocetna">
-
-    <div class="owl-carousel owl-theme header-slider">
+<?php if (have_rows('sadrzaj_1')) : ?>
+    <?php while (have_rows('sadrzaj_1')) : the_row();
 
 
-        <div class="wrapper" style="background-image: url(<?php echo get_template_directory_uri(); ?>/img/po.jpg);">
-            <div class="container">
-                <div class="text_wrap">
-                    <div class="image">
-                        <img src="<?php echo get_template_directory_uri(); ?>/img/logo1-removebg-preview.png" alt="">
-                    </div>
 
-                    <div class="text">
-                        <h2>Mi vidimo</h2>
-                    </div>
-                    <div class="btn_wrap">
-                        <a href="#footer">Kontaktiraj nas</a>
-                    </div>
-                </div>
+
+
+    ?>
+        <div class="home_sec1 section" id="pocetna">
+
+            <div class="owl-carousel owl-theme header-slider">
+                <?php if (have_rows('slider_sadrzaj')) : ?>
+                    <?php while (have_rows('slider_sadrzaj')) : the_row();
+
+                        $pozadinska_slika = get_sub_field('pozadinska_slika');
+                        $naslov = get_sub_field('naslov');
+
+
+
+                    ?>
+
+                        <div class="wrapper" style="background-image: url(<?php echo $pozadinska_slika['sizes']['large']; ?>);">
+                            <div class="container">
+                                <div class="text_wrap">
+                                    <div class="image wow fadeInUp" data-wow-delay="0.5s" data-wow-duration="0.6s">
+                                        <img src="<?php echo get_template_directory_uri(); ?>/img/logo1-removebg-preview.png" alt="">
+                                    </div>
+                                    <?php if ($naslov) : ?>
+                                        <div class="text wow fadeInUp" data-wow-delay="0.6s" data-wow-duration="0.6s">
+                                            <h1><?php echo $naslov; ?></h1>
+                                        </div>
+                                    <?php endif; ?>
+
+                                    <div class="btn_wrap wow fadeInUp" data-wow-delay="0.8s" data-wow-duration="0.6s">
+                                        <?php
+                                        $link = get_sub_field('dugme');
+                                        if ($link) :
+                                            $link_url = $link['url'];
+                                            $link_title = $link['title'];
+                                            $link_target = $link['target'] ? $link['target'] : '_self';
+                                        ?>
+
+
+
+                                            <a href="<?php echo esc_url($link_url); ?>" target="<?php echo esc_attr($link_target); ?>"><?php echo esc_html($link_title); ?> </a><?php endif; ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endwhile; ?>
+                <?php endif; ?>
+
+
+
+
             </div>
+
+            <script>
+                $(document).ready(function() {
+                    $('.owl-carousel.header-slider').owlCarousel({
+                        items: 1,
+                        loop: true,
+
+                        //nav:true,
+                        dots: false,
+                        center: true,
+                        autoplay: true,
+                        autoplaySpeed: 1000,
+                        smartSpeed: 1500,
+                        autoplayHoverPause: false,
+
+
+                    });
+                });
+            </script>
+
+
         </div>
-
-        <div class="wrapper" style="background-image: url(<?php echo get_template_directory_uri(); ?>/img/po.jpg);">
-            <div class="container">
-                <div class="text_wrap">
-                    <div class="image">
-                        <img src="<?php echo get_template_directory_uri(); ?>/img/logo1-removebg-preview.png" alt="">
-                    </div>
-
-                    <div class="text">
-                        <h2>Mi vidimo</h2>
-                    </div>
-                    <div class="btn_wrap">
-                        <a href="#footer">Kontaktiraj nas</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-    </div>
-
-    <script>
-        $(document).ready(function() {
-            $('.owl-carousel.header-slider').owlCarousel({
-                items: 1,
-                loop: true,
-
-                //nav:true,
-                dots: false,
-                center: true,
-                autoplay: true,
-                autoplaySpeed: 1000,
-                smartSpeed: 1500,
-                autoplayHoverPause: false,
-
-
-            });
-        });
-    </script>
-
-
-</div>
-
+    <?php endwhile; ?>
+<?php endif; ?>
 
 
 <div class="home_sec2 section" id="novosti">
@@ -77,10 +92,25 @@ get_header(); ?>
         <div class="row">
             <div class="col-lg-12">
                 <div class="wrapper">
-                    <div class="main_heading">
-                        <h2>Novosti</h2>
-                    </div>
+                    <?php if (have_rows('sadrzaj_2')) : ?>
+                        <?php while (have_rows('sadrzaj_2')) : the_row();
 
+                            $naslov = get_sub_field('naslov');
+
+
+
+
+                        ?>
+                            <?php if ($naslov) : ?>
+                                <div class="main_heading wow fadeInUp" data-wow-delay="0.5s" data-wow-duration="0.6s">
+                                    <h2><?php echo $naslov; ?></h2>
+                                </div>
+                            <?php endif; ?>
+
+
+
+                        <?php endwhile; ?>
+                    <?php endif; ?>
 
 
                 </div>
@@ -137,9 +167,10 @@ get_header(); ?>
 
             ?>
                     <div class="col-lg-4 <?php if ($i == 3) : ?>col-md-12 <?php endif; ?>col-md-6">
-                        <div class="news_wrap">
-                            <?php if ($slika) : ?>
-                                <a href="<?php the_permalink(); ?>">
+                        <a href="<?php the_permalink(); ?>">
+
+                            <div class="news_wrap wow fadeInUp" data-wow-delay="0.7s" data-wow-duration="0.6s">
+                                <?php if ($slika) : ?>
                                     <div class="image" style="background-image: url(<?php echo esc_url($slika['sizes']['medium']); ?>);">
 
                                         <div class="overlay">
@@ -156,11 +187,12 @@ get_header(); ?>
                                             <?php endif; ?>
                                         </div>
                                     </div>
-                                </a>
-                            <?php endif; ?>
+                                <?php endif; ?>
 
 
-                        </div>
+                            </div>
+                        </a>
+
                     </div>
             <?php $i++;
                 endwhile;
@@ -178,165 +210,179 @@ get_header(); ?>
 
 </div>
 
-<div class="home_sec3 section" id="onama">
-    <div class="container">
-        <div class="row">
+<?php if (have_rows('sadrzaj_3')) : ?>
+    <?php while (have_rows('sadrzaj_3')) : the_row();
 
-            <div class="col-lg-12">
-                <div class="main_heading">
-                    <h2>O Nama</h2>
-                </div>
+        $naslov = get_sub_field('naslov');
+        $text = get_sub_field('text');
+        $podnaslov = get_sub_field('podnaslov');
 
-                <div class="text_area">
-                    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.</p>
-                </div>
 
-                <div class="main_heading subtitle">
-                    <h2>Naš Tim</h2>
-                </div>
-            </div>
 
-            <div class="col-lg-3 col-md-6">
 
-                <div class="wrap">
-                    <div class="image_wrap" style="background-image: url(<?php echo get_template_directory_uri(); ?>/img/team1.jpg);">
-                        <div class="overlay">
-                            <div class="icon_img">
-                                <img src="<?php echo get_template_directory_uri(); ?>/img/logo1-removebg-preview.png" alt="">
+    ?>
+
+        <div class="home_sec3 section" id="onama">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-12">
+                        <?php if ($naslov) : ?>
+                            <div class="main_heading wow fadeInUp" data-wow-delay="0.5s" data-wow-duration="0.6s">
+                                <h2><?php echo $naslov; ?></h2>
                             </div>
-                        </div>
-                    </div>
-                    <div class="text_wrap">
-                        <div class="name">
-                            Emil Bevanda
-                        </div>
-
-                        <div class="info_wrap">
-                            <a class="tel" href="#">+063 555 555</a>
-                            <a class="email" href="#">testmail@gmail.com</a>
-                        </div>
+                        <?php endif; ?>
 
 
-                        <div class="social_icon_wrap">
-                            <a class="instagram" href="#"><img src="<?php echo get_template_directory_uri(); ?>/img/header-icon-insatgram.svg" alt=""></a>
-                            <a class="facebook" href="#"><img src="<?php echo get_template_directory_uri(); ?>/img/header-icon-facebook.svg" alt=""></a>
-                            <a class="youtube" href="#"><img src="<?php echo get_template_directory_uri(); ?>/img/youtube.svg" alt=""></a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="col-lg-3 col-md-6">
-
-                <div class="wrap">
-                    <div class="image_wrap" style="background-image: url(<?php echo get_template_directory_uri(); ?>/img/team1.jpg);">
-                        <div class="overlay">
-                            <div class="icon_img">
-                                <img src="<?php echo get_template_directory_uri(); ?>/img/logo1-removebg-preview.png" alt="">
+                        <?php if ($text) : ?>
+                            <div class="text_area wow fadeInUp" data-wow-delay="0.6s" data-wow-duration="0.6s">
+                                <?php echo $text; ?>
                             </div>
-                        </div>
-                    </div>
-                    <div class="text_wrap">
-                        <div class="name">
-                            Emil Bevanda
-                        </div>
-
-                        <div class="info_wrap">
-                            <a class="tel" href="#">+063 555 555</a>
-                            <a class="email" href="#">testmail@gmail.com</a>
-                        </div>
+                        <?php endif; ?>
 
 
-                        <div class="social_icon_wrap">
-                            <a class="instagram" href="#"><img src="<?php echo get_template_directory_uri(); ?>/img/header-icon-insatgram.svg" alt=""></a>
-                            <a class="facebook" href="#"><img src="<?php echo get_template_directory_uri(); ?>/img/header-icon-facebook.svg" alt=""></a>
-                            <a class="youtube" href="#"><img src="<?php echo get_template_directory_uri(); ?>/img/youtube.svg" alt=""></a>
-                        </div>
-                    </div>
-                </div>
 
-            </div>
-
-            <div class="col-lg-3 col-md-6">
-
-                <div class="wrap">
-                    <div class="image_wrap" style="background-image: url(<?php echo get_template_directory_uri(); ?>/img/team1.jpg);">
-                        <div class="overlay">
-                            <div class="icon_img">
-                                <img src="<?php echo get_template_directory_uri(); ?>/img/logo1-removebg-preview.png" alt="">
+                        <?php if ($podnaslov) : ?>
+                            <div class="main_heading subtitle wow fadeInUp" data-wow-delay="0.7s" data-wow-duration="0.6s">
+                                <h2><?php echo $podnaslov; ?></h2>
                             </div>
-                        </div>
+                        <?php endif; ?>
+
                     </div>
-                    <div class="text_wrap">
-                        <div class="name">
-                            Emil Bevanda
-                        </div>
 
-                        <div class="info_wrap">
-                            <a class="tel" href="#">+063 555 555</a>
-                            <a class="email" href="#">testmail@gmail.com</a>
-                        </div>
+                    <?php if (have_rows('clanovi_tima')) : ?>
+                        <?php while (have_rows('clanovi_tima')) : the_row();
+
+                            $slika_ = get_sub_field('slika_');
+                            $ime = get_sub_field('ime');
 
 
-                        <div class="social_icon_wrap">
-                            <a class="instagram" href="#"><img src="<?php echo get_template_directory_uri(); ?>/img/header-icon-insatgram.svg" alt=""></a>
-                            <a class="facebook" href="#"><img src="<?php echo get_template_directory_uri(); ?>/img/header-icon-facebook.svg" alt=""></a>
-                            <a class="youtube" href="#"><img src="<?php echo get_template_directory_uri(); ?>/img/youtube.svg" alt=""></a>
-                        </div>
-                    </div>
-                </div>
 
-            </div>
 
-            <div class="col-lg-3 col-md-6">
 
-                <div class="wrap">
-                    <div class="image_wrap" style="background-image: url(<?php echo get_template_directory_uri(); ?>/img/team1.jpg);">
-                        <div class="overlay">
-                            <div class="icon_img">
-                                <img src="<?php echo get_template_directory_uri(); ?>/img/logo1-removebg-preview.png" alt="">
+                        ?>
+
+                            <div class="col-lg-3 col-md-6">
+
+                                <div class="wrap wow fadeInUp" data-wow-delay="0.8s" data-wow-duration="0.6s">
+                                    <div class="image_wrap" style="background-image: url(<?php echo $slika_['sizes']['medium']; ?>);">
+                                        <div class="overlay">
+                                            <div class="icon_img">
+                                                <img src="<?php echo get_template_directory_uri(); ?>/img/logo1-removebg-preview.png" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text_wrap">
+                                        <?php if ($ime) : ?>
+                                            <div class="name">
+                                                <?php echo $ime; ?>
+                                            </div>
+                                        <?php endif; ?>
+
+
+                                        <div class="info_wrap">
+
+                                            <?php
+                                            $link = get_sub_field('broj_telefona');
+                                            if ($link) :
+                                                $link_url = $link['url'];
+                                                $link_title = $link['title'];
+                                                $link_target = $link['target'] ? $link['target'] : '_self';
+                                            ?>
+
+
+
+                                                <a class="tel" href="<?php echo esc_url($link_url); ?>" target="<?php echo esc_attr($link_target); ?>"><?php echo esc_html($link_title); ?> </a><?php endif; ?>
+
+                                            <?php
+                                            $link = get_sub_field('e-mail');
+                                            if ($link) :
+                                                $link_url = $link['url'];
+                                                $link_title = $link['title'];
+                                                $link_target = $link['target'] ? $link['target'] : '_self';
+                                            ?>
+
+
+
+                                                <a class="email" href="<?php echo esc_url($link_url); ?>" target="<?php echo esc_attr($link_target); ?>"><?php echo esc_html($link_title); ?> </a><?php endif; ?>
+                                        </div>
+
+
+                                        <div class="social_icon_wrap">
+                                            <?php
+                                            $link = get_sub_field('instagram_link');
+                                            if ($link) :
+                                                $link_url = $link['url'];
+                                                $link_title = $link['title'];
+                                                $link_target = $link['target'] ? $link['target'] : '_self';
+                                            ?>
+
+
+
+                                                <a class="instagram" href="<?php echo esc_url($link_url); ?>" target="<?php echo esc_attr($link_target); ?>">
+                                                    <img src="<?php echo get_template_directory_uri(); ?>/img/header-icon-insatgram.svg" alt="">
+                                                </a><?php endif; ?>
+
+                                            <?php
+                                            $link = get_sub_field('facebook_link');
+                                            if ($link) :
+                                                $link_url = $link['url'];
+                                                $link_title = $link['title'];
+                                                $link_target = $link['target'] ? $link['target'] : '_self';
+                                            ?>
+
+
+
+                                                <a class="facebook" href="<?php echo esc_url($link_url); ?>" target="<?php echo esc_attr($link_target); ?>">
+                                                    <img src="<?php echo get_template_directory_uri(); ?>/img/header-icon-facebook.svg" alt="">
+                                                </a><?php endif; ?>
+
+                                            <?php
+                                            $link = get_sub_field('youtube_link');
+                                            if ($link) :
+                                                $link_url = $link['url'];
+                                                $link_title = $link['title'];
+                                                $link_target = $link['target'] ? $link['target'] : '_self';
+                                            ?>
+
+
+
+                                                <a class="youtube" href="<?php echo esc_url($link_url); ?>" target="<?php echo esc_attr($link_target); ?>">
+                                                    <img src="<?php echo get_template_directory_uri(); ?>/img/youtube.svg" alt="">
+                                                </a><?php endif; ?>
+
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
-                        </div>
-                    </div>
-                    <div class="text_wrap">
-                        <div class="name">
-                            Emil Bevanda
-                        </div>
-
-                        <div class="info_wrap">
-                            <a class="tel" href="#">+063 555 555</a>
-                            <a class="email" href="#">testmail@gmail.com</a>
-                        </div>
+                        <?php endwhile; ?>
+                    <?php endif; ?>
 
 
-                        <div class="social_icon_wrap">
-                            <a class="instagram" href="#"><img src="<?php echo get_template_directory_uri(); ?>/img/header-icon-insatgram.svg" alt=""></a>
-                            <a class="facebook" href="#"><img src="<?php echo get_template_directory_uri(); ?>/img/header-icon-facebook.svg" alt=""></a>
-                            <a class="youtube" href="#"><img src="<?php echo get_template_directory_uri(); ?>/img/youtube.svg" alt=""></a>
-                        </div>
-                    </div>
+
+
                 </div>
-
             </div>
-
-
         </div>
-    </div>
-</div>
 
-
+    <?php endwhile; ?>
+<?php endif; ?>
 
 <?php if (have_rows('event_content')) : ?>
     <?php while (have_rows('event_content')) : the_row();
+        $naslov = get_sub_field('naslov');
 
 
     ?>
         <div class="home_sec_events section" id="events">
             <div class="container">
-                <div class="main_heading">
-                    <h2>Događaji</h2>
-                </div>
+
+                <?php if ($naslov) : ?>
+                    <div class="main_heading wow fadeInUp" data-wow-delay="0.5s" data-wow-duration="0.6s">
+                        <h2><?php echo $naslov; ?></h2>
+                    </div>
+                <?php endif; ?>
                 <div class="big_wrapper_cal">
                     <div class="row">
                         <div class="col-lg-5 small-calendar">
@@ -352,7 +398,7 @@ get_header(); ?>
 
                             <div class="con_wrap">
                                 <div class="main_title">
-                                    <h2>Klikni na događaj u kalendaru da bih ga prikazao</h2>
+                                    <h2>Kliknite na događaj u kalendaru da bih se prikazao</h2>
                                 </div>
 
                                 <div class="event_box">
@@ -397,9 +443,9 @@ get_header(); ?>
                             if ($first_event === null || strtotime($event_date) < strtotime($first_event['date'])) {
                                 $first_event = array(
                                     'date' => $event_date,
-                                    'title' => get_sub_field('event_title'),
+                                    'title' => html_entity_decode(get_sub_field('event_title'), ENT_QUOTES, 'UTF-8'),
                                     'image' => get_sub_field('event_image')['url'],
-                                    'text' => strip_tags(get_sub_field('event_text')) // Uklanja HTML tagove
+                                    'text' => strip_tags(html_entity_decode(get_sub_field('event_text'), ENT_QUOTES, 'UTF-8')) // Dekodiranje HTML entiteta i uklanjanje HTML tagova
                                 );
                             }
                         }
@@ -432,9 +478,9 @@ get_header(); ?>
                 <?php if (have_rows('date_event_box')) :
                     while (have_rows('date_event_box')) : the_row();
                         $event_date = get_sub_field('event_date');
-                        $event_title = get_sub_field('event_title');
+                        $event_title = html_entity_decode(get_sub_field('event_title'), ENT_QUOTES, 'UTF-8');
                         $event_image = get_sub_field('event_image');
-                        $event_text = strip_tags(get_sub_field('event_text')); // Uklanja HTML tagove
+                        $event_text = strip_tags(html_entity_decode(get_sub_field('event_text'), ENT_QUOTES, 'UTF-8')); // Dekodiranje HTML entiteta i uklanjanje HTML tagova
                 ?>
                         events.push({
                             title: '<?php echo esc_js($event_title); ?>',
@@ -535,6 +581,9 @@ get_header(); ?>
 
 
 
+
+
+
         <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.14/index.global.min.js'></script>
 
     <?php endwhile; ?>
@@ -549,7 +598,7 @@ get_header(); ?>
         const documentHeight = document.body.scrollHeight - window.innerHeight;
         const scrollPercentage = scrollPosition / documentHeight;
 
-        const colors = ['#daddd8', '#d5e7c8', '#d3f2bc', '#abd78b', '#85bc5d', '#63b02b'];
+        const colors = ['#daddd8', '#d5e7c8', '#d3f2bc', '#9ae4e5', '#88eff1', '#5cf2f5'];
 
         const colorIndex = Math.floor(scrollPercentage * (colors.length - 1));
         const nextColorIndex = (colorIndex + 1) < colors.length ? colorIndex + 1 : colorIndex;
@@ -584,23 +633,47 @@ get_header(); ?>
     }
 </script>
 
-<div class="home_lokacija" id="lokacija">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="map_mega_wrap">
-                    <div class="main_heading">
-                        <h2>Gdje se nalazimo</h2>
-                    </div>
 
-                    <div class="mapa">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5803.076328060768!2d17.795815097382278!3d43.34485238688282!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134b43b18de394db%3A0x1928f9d3a19dbf8e!2sBiskupski%20ordinarijat%20Mostar!5e0!3m2!1sen!2sba!4v1723715826372!5m2!1sen!2sba" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+<?php if (have_rows('sadrzaj_5')) : ?>
+    <?php while (have_rows('sadrzaj_5')) : the_row();
+        $naslov = get_sub_field('naslov');
+        $google_karta = get_sub_field('google_karta');
+        $velika_paralex_slika = get_sub_field('velika_paralex_slika');
+
+
+    ?>
+
+        <?php if ($velika_paralex_slika) : ?>
+            <div class="sec_big_image" style="background-image: url(<?php echo $velika_paralex_slika['sizes']['large']; ?>);">
+
+            </div>
+        <?php endif; ?>
+
+
+        <div class="home_lokacija" id="lokacija">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="map_mega_wrap">
+                            <?php if ($naslov) : ?>
+                                <div class="main_heading wow fadeInUp" data-wow-delay="0.5s" data-wow-duration="0.6s">
+                                    <h2><?php echo $naslov; ?></h2>
+                                </div>
+                            <?php endif; ?>
+
+                            <?php if ($google_karta) : ?>
+                                <div class="mapa">
+                                    <?php echo $google_karta; ?>
+                                </div>
+                            <?php endif; ?>
+
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    <?php endwhile; ?>
+<?php endif; ?>
 
 
 <?php get_footer(); ?>

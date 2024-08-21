@@ -32,6 +32,16 @@
 <body id="page-top" <?php body_class(); ?>>
 	<div class="page-wrap">
 
+		<?php if (is_front_page()) : ?>
+			<div class="voice_open_btn">
+				<div class="inner_btn">
+					<span>Upali glasovnu navigaciju</span>
+					<img src="<?php echo get_template_directory_uri(); ?>/img/free-microphone-icon-342-thumb.png" alt="">
+				</div>
+			</div>
+		<?php endif; ?>
+
+
 		<div class="fixed_info">
 			<div class="phone info_gl">
 				<a href="#"><img src="<?php echo get_template_directory_uri(); ?>/img/phone-round1.png" alt=""></a>
