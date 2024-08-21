@@ -216,17 +216,9 @@
           isListening = false;
           btnText.textContent = "Upali glasovnu navigaciju";
         } else {
-          // Speak the welcome message
-          const welcomeMessage = "Dobrodošli na web stranicu Mi vidimo.";
-          const utterance = new SpeechSynthesisUtterance(welcomeMessage);
-          utterance.lang = "hr-HR";
-          utterance.onend = () => {
-            // Start speech recognition after the message is spoken
-            recognition.start();
-            isListening = true;
-            btnText.textContent = "Ugasi glasovnu navigaciju";
-          };
-          synth.speak(utterance);
+          recognition.start();
+          isListening = true;
+          btnText.textContent = "Ugasi glasovnu navigaciju";
         }
       }
 
