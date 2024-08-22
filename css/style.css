@@ -1126,10 +1126,63 @@ body.single-blog-details .menu-item-34 a {
   background: green;
   border-radius: 20px;
   color: #000;
-  color: #fff;
+  /* color: #fff; */
   cursor: pointer;
   font-size: 16px;
+  z-index:111;
+  position:relative;
+  font-weight: 700;
 }
+
+.voice_open_btn .inner_btn:after{
+  content:"";
+  z-index:-1;
+  position:absolute;
+  width:100%;
+  height:100%;
+  left:0;
+  top:0;
+  border-radius: 20px;
+  background-color: #fcc137;
+}
+
+.voice_open_btn .inner_btn:before{
+   content: "";
+  background: linear-gradient(
+    45deg,
+    #FF0000, #FF4500, #FF6347, #FF7F50,
+    #FF8C69, #FF6F61, #FF5A5F, #FF0000
+  );
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  background-size: 600%;
+  z-index: -1;
+  width: calc(100% + 4px);
+  height:  calc(100% + 4px);
+  filter: blur(8px);
+  animation: glowing 20s linear infinite;
+  transition: opacity .3s ease-in-out;
+  border-radius:20px;
+  opacity: 1;
+}
+
+.voice_open_btn .inner_btn.active:before{
+  background: linear-gradient(
+    45deg,
+    #00FF00, #32CD32, #3CB371, #66CDAA,
+    #2E8B57, #00FA9A, #20B2AA, #00FF00
+  );
+
+}
+
+@keyframes glowing {
+  0% {background-position: 0 0;}
+  50% {background-position: 400% 0;}
+  100% {background-position: 0 0;}
+}
+
+
 
 .voice_open_btn .inner_btn img {
   max-width: 30px;
@@ -1915,6 +1968,11 @@ body.single-blog-details .menu-item-34 a {
 @media (max-width: 1750px) {
   .container{
     max-width: 1151px;
+}
+
+  .home_sec1 .wrapper .text_wrap {
+  text-align: center;
+  padding-top: 100px;
 }
 }
 

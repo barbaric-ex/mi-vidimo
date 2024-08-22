@@ -41,16 +41,48 @@
 			</div>
 		<?php endif; ?>
 
+		<?php if (have_rows('footer', 'options')) : ?>
+			<?php while (have_rows('footer', 'options')) : the_row();
 
-		<div class="fixed_info">
-			<div class="phone info_gl">
-				<a href="#"><img src="<?php echo get_template_directory_uri(); ?>/img/phone-round1.png" alt=""></a>
-			</div>
 
-			<div class="email info_gl">
-				<a href="mailto:mladi@biskupija-mostar.ba"><img src="<?php echo get_template_directory_uri(); ?>/img/email-round1.png" alt=""></a>
-			</div>
-		</div>
+
+
+			?>
+				<div class="fixed_info">
+					<div class="phone info_gl">
+						<?php
+						$link = get_sub_field('broj_telefona');
+						if ($link) :
+							$link_url = $link['url'];
+							$link_title = $link['title'];
+							$link_target = $link['target'] ? $link['target'] : '_self';
+						?>
+
+
+
+							<a class="tel" href="<?php echo esc_url($link_url); ?>" target="<?php echo esc_attr($link_target); ?>"><img src="<?php echo get_template_directory_uri(); ?>/img/phone-round1.png" alt=""></a>
+						<?php endif; ?>
+
+					</div>
+
+					<div class="email info_gl">
+						<?php
+						$link = get_sub_field('email');
+						if ($link) :
+							$link_url = $link['url'];
+							$link_title = $link['title'];
+							$link_target = $link['target'] ? $link['target'] : '_self';
+						?>
+
+
+
+							<a class="email" href="<?php echo esc_url($link_url); ?>" target="<?php echo esc_attr($link_target); ?>"><img src="<?php echo get_template_directory_uri(); ?>/img/email-round1.png" alt=""></a>
+						<?php endif; ?>
+
+					</div>
+				</div>
+			<?php endwhile; ?>
+		<?php endif; ?>
 		<div class="search-fixed-wrap">
 			<div class="close-btn-search">
 				<img src="<?php echo get_template_directory_uri(); ?>/img/iconx.png">

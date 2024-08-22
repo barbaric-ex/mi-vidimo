@@ -195,40 +195,42 @@
 
   /******************************************* */
 
-  // Kod za glasovnu navigaciju
   document.addEventListener("DOMContentLoaded", function () {
-    // Check if the browser supports the Web Speech API
+    // Provjera podržava li preglednik Web Speech API
     if ("webkitSpeechRecognition" in window && "speechSynthesis" in window) {
       const recognition = new webkitSpeechRecognition();
       const synth = window.speechSynthesis; // SpeechSynthesis API
-      recognition.lang = "hr-HR"; // Set language to Croatian
-      recognition.continuous = true; // Keep listening until manually stopped
+      recognition.lang = "hr-HR"; // Postavi jezik na hrvatski
+      recognition.continuous = true; // Nastavi slušati dok se ručno ne zaustavi
       recognition.interimResults = false;
 
       let isListening = false;
 
-      // Function to start/stop the microphone
+      // Funkcija za pokretanje/zaustavljanje mikrofona
       function toggleVoiceNavigation() {
         const btnText = document.querySelector(".inner_btn span");
+        const innerBtn = document.querySelector(".inner_btn");
 
         if (isListening) {
           recognition.stop();
           isListening = false;
           btnText.textContent = "Upali glasovnu navigaciju";
+          innerBtn.classList.remove("active");
         } else {
           recognition.start();
           isListening = true;
           btnText.textContent = "Ugasi glasovnu navigaciju";
+          innerBtn.classList.add("active");
         }
       }
 
-      // Handle voice commands
+      // Obradi glasovne naredbe
       recognition.onresult = function (event) {
         const transcript = event.results[event.results.length - 1][0].transcript
           .trim()
           .toLowerCase();
 
-        // Voice commands
+        // Glasovne naredbe
         if (
           [
             "novosti",
@@ -308,10 +310,16 @@
           )
         ) {
           document.querySelector(".linkovi .email").click();
+        } else if (transcript === "instagram") {
+          document.querySelector(".instagram").click();
+        } else if (transcript === "facebook") {
+          document.querySelector(".facebook").click();
+        } else if (transcript === "youtube") {
+          document.querySelector(".youtube").click();
         }
       };
 
-      // Add click event to the button if it exists
+      // Dodaj event listener za klik na dugme
       const voiceOpenBtn = document.querySelector(".voice_open_btn");
       if (voiceOpenBtn) {
         voiceOpenBtn.addEventListener("click", toggleVoiceNavigation);
