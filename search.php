@@ -24,7 +24,7 @@ Template Name: Search Page
 				</ul>
 				<div class="paginate-search"><?php echo paginate_links(); ?></div>
 			<?php } else { ?>
-				<h3>Ihre Suche nach „<?php echo $search;  ?>“ ergab 0 Treffer</h3>
+				<h3>Pretraga za “<?php echo $search;  ?>“ ima 0 rezultata</h3>
 			<?php } ?>
 		</div>
 	</div>

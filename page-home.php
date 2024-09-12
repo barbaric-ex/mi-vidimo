@@ -30,7 +30,7 @@ get_header(); ?>
                             <div class="container">
                                 <div class="text_wrap">
                                     <div class="image wow fadeInUp" data-wow-delay="0.5s" data-wow-duration="0.6s">
-                                        <img src="<?php echo get_template_directory_uri(); ?>/img/logo1-removebg-preview.png" alt="">
+                                        <img src="<?php echo get_template_directory_uri(); ?>/img/logo1-removebg-preview.png" alt="logo">
                                     </div>
                                     <?php if ($naslov) : ?>
                                         <div class="text wow fadeInUp" data-wow-delay="0.6s" data-wow-duration="0.6s">
@@ -75,6 +75,8 @@ get_header(); ?>
                         autoplaySpeed: 1000,
                         smartSpeed: 1500,
                         autoplayHoverPause: false,
+                        animateOut: 'fadeOut',
+                        animateIn: 'fadeIn'
 
 
                     });
@@ -86,8 +88,39 @@ get_header(); ?>
     <?php endwhile; ?>
 <?php endif; ?>
 
+<div class="home_sec12">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="wrapper">
+                    <div class="title">
+                        <h2>Mladi <span id="typed-text"></span></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-<div class="home_sec2 section" id="novosti">
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+<script>
+    var typed = new Typed("#typed-text", {
+        strings: ["vjere", "djela", "i molitve"],
+        typeSpeed: 50, // Brzina tipkanja
+        backSpeed: 30, // Brzina brisanja
+        backDelay: 1000, // Pauza prije brisanja
+        startDelay: 500, // Pauza prije nego počne tipkati prvi tekst
+        loop: true, // Ponavljanje
+        showCursor: true, // Prikazivanje kursora
+        cursorChar: '|', // Karakter kursora
+    });
+</script>
+
+<div class="anchor" id="novosti"></div>
+
+
+<div class="home_sec2 section">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -172,6 +205,9 @@ get_header(); ?>
                             <div class="news_wrap wow fadeInUp" data-wow-delay="0.7s" data-wow-duration="0.6s">
                                 <?php if ($slika) : ?>
                                     <div class="image" style="background-image: url(<?php echo esc_url($slika['sizes']['medium']); ?>);">
+                                        <div class="small_logo">
+                                            <img src="<?php echo get_template_directory_uri(); ?>/img/logo1-removebg-preview.png" alt="logo">
+                                        </div>
 
                                         <div class="overlay">
 
@@ -183,6 +219,11 @@ get_header(); ?>
                                             <?php if ($naslov) : ?>
                                                 <div class="title_image">
                                                     <h3><?php echo esc_html($naslov); ?></h3>
+                                                </div>
+                                            <?php else: ?>
+
+                                                <div class="title_image">
+                                                    <h3><?php the_title(); ?></h3>
                                                 </div>
                                             <?php endif; ?>
                                         </div>
@@ -210,6 +251,8 @@ get_header(); ?>
 
 </div>
 
+
+<div class="anchor" id="onama"></div>
 <?php if (have_rows('sadrzaj_3')) : ?>
     <?php while (have_rows('sadrzaj_3')) : the_row();
 
@@ -222,7 +265,7 @@ get_header(); ?>
 
     ?>
 
-        <div class="home_sec3 section" id="onama">
+        <div class="home_sec3 section">
             <div class="container">
                 <div class="row">
 
@@ -243,7 +286,7 @@ get_header(); ?>
 
 
                         <?php if ($podnaslov) : ?>
-                            <div class="main_heading subtitle wow fadeInUp" data-wow-delay="0.7s" data-wow-duration="0.6s">
+                            <div class="main_heading subtitle wow fadeInUp" data-wow-delay="0.7s" data-wow-duration="0.6s" id="nas_tim">
                                 <h2><?php echo $podnaslov; ?></h2>
                             </div>
                         <?php endif; ?>
@@ -268,7 +311,7 @@ get_header(); ?>
                                     <div class="image_wrap" style="background-image: url(<?php echo $slika_['sizes']['medium']; ?>);">
                                         <div class="overlay">
                                             <div class="icon_img">
-                                                <img src="<?php echo get_template_directory_uri(); ?>/img/logo1-removebg-preview.png" alt="">
+                                                <img src="<?php echo get_template_directory_uri(); ?>/img/logo1-removebg-preview.png" alt="logo">
                                             </div>
                                         </div>
                                     </div>
@@ -320,7 +363,7 @@ get_header(); ?>
 
 
                                                 <a class="instagram" href="<?php echo esc_url($link_url); ?>" target="<?php echo esc_attr($link_target); ?>">
-                                                    <img src="<?php echo get_template_directory_uri(); ?>/img/header-icon-insatgram.svg" alt="">
+                                                    <img src="<?php echo get_template_directory_uri(); ?>/img/header-icon-insatgram.svg" alt="instagram">
                                                 </a><?php endif; ?>
 
                                             <?php
@@ -334,7 +377,7 @@ get_header(); ?>
 
 
                                                 <a class="facebook" href="<?php echo esc_url($link_url); ?>" target="<?php echo esc_attr($link_target); ?>">
-                                                    <img src="<?php echo get_template_directory_uri(); ?>/img/header-icon-facebook.svg" alt="">
+                                                    <img src="<?php echo get_template_directory_uri(); ?>/img/header-icon-facebook.svg" alt="facebook">
                                                 </a><?php endif; ?>
 
                                             <?php
@@ -348,7 +391,7 @@ get_header(); ?>
 
 
                                                 <a class="youtube" href="<?php echo esc_url($link_url); ?>" target="<?php echo esc_attr($link_target); ?>">
-                                                    <img src="<?php echo get_template_directory_uri(); ?>/img/youtube.svg" alt="">
+                                                    <img src="<?php echo get_template_directory_uri(); ?>/img/youtube.svg" alt="youtube">
                                                 </a><?php endif; ?>
 
                                         </div>
@@ -369,13 +412,19 @@ get_header(); ?>
     <?php endwhile; ?>
 <?php endif; ?>
 
+
+
+<div class="anchor" id="events"></div>
+
+
 <?php if (have_rows('event_content')) : ?>
     <?php while (have_rows('event_content')) : the_row();
         $naslov = get_sub_field('naslov');
 
 
     ?>
-        <div class="home_sec_events section" id="events">
+
+        <div class="home_sec_events section">
             <div class="container">
 
                 <?php if ($naslov) : ?>
@@ -395,19 +444,23 @@ get_header(); ?>
                         </div>
 
                         <div class="col-lg-7">
-
+                            <div class="anchor" id="con_event_wrap"></div>
                             <div class="con_wrap">
                                 <div class="main_title">
                                     <h2>Kliknite na događaj u kalendaru da bih se prikazao</h2>
                                 </div>
 
+                                <div class="main_title2">
+                                    <h2>Trenutno nema događaja</h2>
+                                </div>
+
                                 <div class="event_box">
                                     <div class="image">
-                                        <img src="<?php echo get_template_directory_uri(); ?>/img/po.jpg" alt="">
+                                        <img src="<?php echo get_template_directory_uri(); ?>/img/og-img.jpg" alt="name">
                                     </div>
 
                                     <div class="title">
-                                        <h3>Neki Title</h3>
+                                        <h3></h3>
                                     </div>
 
                                     <div class="date">
@@ -415,7 +468,7 @@ get_header(); ?>
                                     </div>
 
                                     <div class="event_text">
-                                        <p>test</p>
+
                                     </div>
                                 </div>
 
@@ -427,11 +480,15 @@ get_header(); ?>
             </div>
         </div>
 
+
+
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 var calendarEl = document.getElementById('calendar');
                 var events = [];
                 var defaultEvent;
+                var noEventsMessage = document.querySelector('.main_title2');
+                var hasEventsMessage = document.querySelector('.main_title');
 
                 // PHP kod za dobivanje prvog nadolazećeg događaja
                 <?php if (have_rows('date_event_box')) :
@@ -445,7 +502,7 @@ get_header(); ?>
                                     'date' => $event_date,
                                     'title' => html_entity_decode(get_sub_field('event_title'), ENT_QUOTES, 'UTF-8'),
                                     'image' => get_sub_field('event_image')['url'],
-                                    'text' => strip_tags(html_entity_decode(get_sub_field('event_text'), ENT_QUOTES, 'UTF-8')) // Dekodiranje HTML entiteta i uklanjanje HTML tagova
+                                    'text' => get_sub_field('event_text') // Prikazivanje originalnog HTML sadržaja
                                 );
                             }
                         }
@@ -456,22 +513,30 @@ get_header(); ?>
                             date: '<?php echo esc_js($first_event['date']); ?>',
                             title: '<?php echo esc_js($first_event['title']); ?>',
                             image: '<?php echo esc_js($first_event['image']); ?>',
-                            text: '<?php echo esc_js($first_event['text']); ?>'
+                            text: `<?php echo wp_kses_post($first_event['text']); ?>` // Koristi HTML sadržaj bez strip tagova
                         };
                     <?php endif; ?>
                 <?php endif; ?>
 
                 // Funkcija za uklanjanje HTML tagova
-                function stripHtmlTags(html) {
-                    return html.replace(/<\/?[^>]+>/gi, ''); // Uklanja HTML tagove
+
+
+                // Funkcija za formatiranje datuma u željeni format
+                function formatDate(dateString) {
+                    var date = new Date(dateString);
+                    return date.toLocaleDateString('hr-HR', {
+                        day: '2-digit',
+                        month: '2-digit',
+                        year: 'numeric'
+                    }).replace(/(\d{2})\.(\d{2})\.(\d{4})/, '$1. $2. $3');
                 }
 
                 // Postavljanje prvotnog događaja
                 if (defaultEvent) {
                     document.querySelector('.event_box .image img').src = defaultEvent.image;
                     document.querySelector('.event_box .title h3').textContent = defaultEvent.title;
-                    document.querySelector('.event_box .date p').textContent = defaultEvent.date;
-                    document.querySelector('.event_box .event_text p').textContent = stripHtmlTags(defaultEvent.text); // Koristi funkciju za uklanjanje HTML tagova
+                    document.querySelector('.event_box .date p').textContent = formatDate(defaultEvent.date);
+                    document.querySelector('.event_box .event_text').innerHTML = defaultEvent.text; // Koristi innerHTML umjesto textContent za prikaz HTML sadržaja
                 }
 
                 // Konfiguracija kalendara
@@ -480,16 +545,18 @@ get_header(); ?>
                         $event_date = get_sub_field('event_date');
                         $event_title = html_entity_decode(get_sub_field('event_title'), ENT_QUOTES, 'UTF-8');
                         $event_image = get_sub_field('event_image');
-                        $event_text = strip_tags(html_entity_decode(get_sub_field('event_text'), ENT_QUOTES, 'UTF-8')); // Dekodiranje HTML entiteta i uklanjanje HTML tagova
+                        $event_text = get_sub_field('event_text'); // Prikazivanje originalnog HTML sadržaja
                 ?>
                         events.push({
                             title: '<?php echo esc_js($event_title); ?>',
                             start: '<?php echo esc_js(date('Y-m-d', strtotime($event_date))); ?>',
                             image: '<?php echo esc_js($event_image['url']); ?>',
-                            text: '<?php echo esc_js($event_text); ?>'
+                            text: `<?php echo wp_kses_post($event_text); ?>` // HTML sadržaj bez uklanjanja tagova
                         });
                     <?php endwhile; ?>
                 <?php endif; ?>
+
+
 
                 var monthEl = document.querySelector('.date_wrapper h4');
                 var dateEl = document.querySelector('.date_wrapper p');
@@ -534,6 +601,8 @@ get_header(); ?>
                     }
                 }
 
+
+
                 var calendar = new FullCalendar.Calendar(calendarEl, {
                     initialView: 'dayGridMonth',
                     locale: 'hr',
@@ -555,18 +624,55 @@ get_header(); ?>
                         setTimeout(function() {
                             document.querySelector('.event_box .image img').src = event.image;
                             document.querySelector('.event_box .title h3').textContent = info.event.title;
-                            document.querySelector('.event_box .date p').textContent = info.event.startStr;
-                            document.querySelector('.event_box .event_text p').textContent = stripHtmlTags(event.text); // Koristi funkciju za uklanjanje HTML tagova
+                            document.querySelector('.event_box .date p').textContent = formatDate(info.event.startStr);
+                            document.querySelector('.event_box .event_text').innerHTML = event.text; // innerHTML umjesto textContent za HTML sadržaj
                             eventBox.classList.remove('slide-out');
                         }, 300); // Animacija traje 300ms
+
+                        // Provjera širine prozora i skrolanje na dio s ID-om 'con_event_wrap' ako je manja od 991px
+                        if (window.innerWidth < 991) {
+                            var conEventWrap = document.getElementById('con_event_wrap');
+                            conEventWrap.scrollIntoView({
+                                behavior: 'smooth'
+                            });
+                        }
                     }
                 });
 
                 calendar.render();
 
+                // Funkcija za ažuriranje mjeseca i godine u .date_wrapper
                 document.querySelectorAll('.fc-toolbar-chunk button.fc-button.fc-button-primary').forEach(function(button) {
-                    button.addEventListener('click', updateMonthDisplay);
+                    button.addEventListener('click', function() {
+                        var currentCalendarMonth = calendar.view.currentStart;
+                        var newMonth = currentCalendarMonth.toLocaleDateString('hr-HR', {
+                            month: 'long'
+                        });
+                        var newYear = currentCalendarMonth.toLocaleDateString('hr-HR', {
+                            year: 'numeric'
+                        });
+                        var monthEl = document.querySelector('.date_wrapper h4');
+                        var yearEl = document.querySelector('.date_wrapper p');
+
+                        monthEl.textContent = newMonth;
+
+                        // Prikazuje godinu ako je novi mjesec različit od tekućeg mjeseca
+                        if (newMonth === currentMonth) {
+                            yearEl.textContent = currentDate;
+                        } else {
+                            yearEl.textContent = newYear;
+                        }
+                    });
                 });
+
+                // Prikazivanje ili skrivanje poruka o događajima
+                if (events.length > 0) {
+                    noEventsMessage.style.display = 'none';
+                    hasEventsMessage.style.display = 'block';
+                } else {
+                    noEventsMessage.style.display = 'block';
+                    hasEventsMessage.style.display = 'none';
+                }
             });
         </script>
 
@@ -574,14 +680,9 @@ get_header(); ?>
 
 
 
+        <style>
 
-
-
-
-
-
-
-
+        </style>
 
 
         <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.14/index.global.min.js'></script>
@@ -644,10 +745,22 @@ get_header(); ?>
     ?>
 
         <?php if ($velika_paralex_slika) : ?>
-            <div class="sec_big_image" style="background-image: url(<?php echo $velika_paralex_slika['sizes']['large']; ?>);">
-
+            <div class="section_paralex">
+                <div class="sec_big_image bac_wrap">
+                    <img class="thumbnail" src="<?php echo $velika_paralex_slika['sizes']['large']; ?>" alt="">
+                </div>
             </div>
         <?php endif; ?>
+
+        <script src="https://cdn.jsdelivr.net/npm/simple-parallax-js@5.5.1/dist/simpleParallax.min.js"></script>
+
+        <script>
+            var image = document.getElementsByClassName('thumbnail');
+            new simpleParallax(image, {
+                delay: .6,
+                transition: 'cubic-bezier(0,0,0,1)'
+            });
+        </script>
 
 
         <div class="home_lokacija" id="lokacija">
@@ -675,5 +788,76 @@ get_header(); ?>
     <?php endwhile; ?>
 <?php endif; ?>
 
+
+<!-- Dodaj dugme -->
+
+<div class="aud_wrapper">
+    <div id="playButton" class="pulse"> </div>
+</div>
+
+<!-- Dodaj audio element -->
+
+<?php if (have_rows('sadrzaj_1')) : ?>
+    <?php while (have_rows('sadrzaj_1')) : the_row();
+
+        $pozadinska_glazba = get_sub_field('pozadinska_glazba');
+
+
+
+    ?>
+        <audio id="myAudio">
+            <source src="<?php echo $pozadinska_glazba; ?>" type="audio/mpeg">
+            Vaš preglednik ne podržava audio element.
+        </audio>
+
+    <?php endwhile; ?>
+<?php endif; ?>
+
+<script>
+    document.getElementById('playButton').addEventListener('click', function() {
+        var audio = document.getElementById('myAudio');
+
+        if (audio.paused || audio.ended) {
+            // Ako je muzika pauzirana ili završena, pokreni je
+            audio.play().catch(function(error) {
+                console.log('Greška prilikom pokretanja muzike:', error);
+            });
+            // Promijeni pozadinsku sliku kad se muzika pokrene
+            this.style.backgroundImage = "url('<?php echo get_template_directory_uri(); ?>/img/multimedia-pause-icon-circle-button.svg')";
+        } else {
+            // Ako muzika svira, pauziraj je
+            audio.pause();
+            // Promijeni pozadinsku sliku kad se muzika pauzira
+            this.style.backgroundImage = "url('<?php echo get_template_directory_uri(); ?>/img/music.svg')";
+        }
+    });
+
+    // Dodaj event listener za kada muzika završi
+    document.getElementById('myAudio').addEventListener('ended', function() {
+        var playButton = document.getElementById('playButton');
+        // Vrati pozadinsku sliku na početnu
+        playButton.style.backgroundImage = "url('<?php echo get_template_directory_uri(); ?>/img/music.svg')";
+        // Resetiraj audio tako da se može ponovo pustiti bez osvježavanja stranice
+        this.currentTime = 0;
+    });
+</script>
+
+<div class="anchor" id="forma"></div>
+<div class="section_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="main_heading wow fadeInUp" data-wow-delay="0.5s" data-wow-duration="0.6s">
+                    <h2>Pošalji nam poruku</h2>
+                </div>
+                <div class="form_wrapper">
+                    <?php echo do_shortcode('[advanced_form form="form_66d71de1a346e" submit_text="POŠALJI"]'); ?>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <?php get_footer(); ?>

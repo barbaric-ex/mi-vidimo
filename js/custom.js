@@ -65,11 +65,15 @@
       $(".home_sec3 .wrap").off("mouseenter mouseleave"); // Ukloni hover događaje
 
       $(".home_sec3 .wrap").on("click", ".image_wrap", function () {
+        var $wrap = $(this).closest(".wrap");
         var $textWrap = $(this).siblings(".text_wrap");
         $textWrap.stop(true, true).slideToggle(300); // Toggla otvaranje i zatvaranje
 
         var currentRadius = $(this).css("border-radius");
         $(this).css("border-radius", currentRadius === "0px" ? "20px" : "0"); // Toggla border-radius
+
+        // Dodaj klasu 'active' ako je otvoreno, makni ako je zatvoreno
+        $wrap.toggleClass("active");
       });
     }
 
@@ -193,7 +197,7 @@
     });
   });
 
-  /******************************************* */
+  /*****************************************/
 
   document.addEventListener("DOMContentLoaded", function () {
     // Provjera podržava li preglednik Web Speech API
@@ -201,7 +205,7 @@
       const recognition = new webkitSpeechRecognition();
       const synth = window.speechSynthesis; // SpeechSynthesis API
       recognition.lang = "hr-HR"; // Postavi jezik na hrvatski
-      recognition.continuous = true; // Nastavi slušati dok se ručno ne zaustavi
+      recognition.continuous = true; // Pokušava slušati kontinuirano
       recognition.interimResults = false;
 
       let isListening = false;
@@ -217,10 +221,20 @@
           btnText.textContent = "Upali glasovnu navigaciju";
           innerBtn.classList.remove("active");
         } else {
-          recognition.start();
-          isListening = true;
-          btnText.textContent = "Ugasi glasovnu navigaciju";
-          innerBtn.classList.add("active");
+          try {
+            recognition.start();
+            isListening = true;
+            btnText.textContent = "Ugasi glasovnu navigaciju";
+            innerBtn.classList.add("active");
+          } catch (error) {
+            console.error(
+              "Došlo je do greške prilikom pokretanja prepoznavanja glasa:",
+              error
+            );
+            alert(
+              "Došlo je do greške prilikom pokretanja prepoznavanja glasa. Molimo pokušajte ponovno."
+            );
+          }
         }
       }
 
@@ -316,6 +330,26 @@
           document.querySelector(".facebook").click();
         } else if (transcript === "youtube") {
           document.querySelector(".youtube").click();
+        }
+      };
+
+      // Ako se prepoznavanje zaustavi, pokušaj ga ponovo pokrenuti
+      recognition.onend = function () {
+        if (isListening) {
+          recognition.start();
+        }
+      };
+
+      // Obradi greške
+      recognition.onerror = function (event) {
+        console.error("Greška u prepoznavanju glasa:", event.error);
+        if (
+          event.error === "not-allowed" ||
+          event.error === "service-not-allowed"
+        ) {
+          alert(
+            "Pristup mikrofonu je odbijen ili nije dostupan. Molimo provjerite postavke."
+          );
         }
       };
 

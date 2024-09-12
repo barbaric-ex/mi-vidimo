@@ -114,3 +114,20 @@ function enqueue_voice_navigation_script()
     }
 }
 add_action('wp_enqueue_scripts', 'enqueue_voice_navigation_script');
+
+
+function af_custom_reply_to($email_args, $form, $fields, $entry_id)
+{
+    // Pretpostavka da je 'e-mail' naziv polja za korisnikov email.
+    $user_email = isset($fields['e-mail']) ? $fields['e-mail'] : '';
+
+    if (! empty($user_email)) {
+        // Dodajemo zaglavlje za Reply-To
+        $email_args['headers'][] = 'Reply-To: ' . $user_email;
+    }
+
+    return $email_args;
+}
+
+// Dodaj filter bez specifičnog ID-ja forme da se primjeni na sve forme
+add_filter('af/form/email/admin/args', 'af_custom_reply_to', 10, 4);
