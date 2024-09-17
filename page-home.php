@@ -457,6 +457,9 @@ get_header(); ?>
                                 <div class="event_box">
                                     <div class="image">
                                         <img src="<?php echo get_template_directory_uri(); ?>/img/og-img.jpg" alt="name">
+                                        <div class="logo_img_sm">
+                                            <img src="<?php echo get_template_directory_uri(); ?>/img/logo1-removebg-preview.png" alt="name">
+                                        </div>
                                     </div>
 
                                     <div class="title">

@@ -90,7 +90,7 @@
 			<div class="search-wrap">
 				<form role="search" method="get" action="/" id="searchform">
 
-					<input type="text" value="" name="s" id="s" placeholder="Pretraži...">
+					<input type="text" value="" name="s" id="s" placeholder="Pretraži novosti...">
 
 				</form>
 			</div>
@@ -100,6 +100,11 @@
 				<div class="menu-btn"><button class="c-hamburger c-hamburger--htx"><span>toggle menu</span> </button></div>
 				<div class="logo animsition-link"><a href="<?php echo home_url(); ?>"><img src="<?php echo get_template_directory_uri(); ?>/img/logo_main.png" alt="Name"></a></div>
 				<div class="collapse navbar-collapse " id="navbarResponsive">
+
+					<div class="right_logo_inner">
+						<img src="<?php echo get_template_directory_uri(); ?>/img/logo1-removebg-preview.png" alt="Name">
+					</div>
+
 					<?php
 					wp_nav_menu(array(
 						'theme_location'  => 'primary',
