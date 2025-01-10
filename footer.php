@@ -10,6 +10,8 @@
 
 		$naslov_2 = get_sub_field('naslov_2');
 		$naslov_3 = get_sub_field('naslov_3');
+		$naslov_4 = get_sub_field('naslov_4');
+		$broj_racuna = get_sub_field('broj_racuna');
 
 
 	?>
@@ -19,7 +21,7 @@
 				<div class="row">
 					<div class="col-lg-3">
 						<div class="logo_wrap wrap">
-							<img src="<?php echo get_template_directory_uri(); ?>/img/logo_main.png" alt="">
+							<img src="<?php echo get_template_directory_uri(); ?>/img/logo_main2.png" alt="">
 						</div>
 					</div>
 
@@ -79,6 +81,23 @@
 									</a>
 								<?php endif; ?>
 							</div>
+						</div>
+
+						<div class="wrap wrap2 wrap_racun">
+
+							<?php if ($naslov_4) : ?>
+								<div class="title">
+									<h3><?php echo $naslov_4 ?></h3>
+								</div>
+							<?php endif; ?>
+							<?php if ($broj_racuna) : ?>
+								<div class="racun">
+									<p><?php echo $broj_racuna ?></p>
+								</div>
+							<?php endif; ?>
+
+
+
 						</div>
 					</div>
 
@@ -142,12 +161,23 @@
 
 						</div>
 					</div>
+
+					<div class="col-lg-12">
+						<div class="copyright_wrap">
+							<p>&copy; 2024 <span>Mi Vidimo.</span> Sva prava pridržana.</p>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	<?php endwhile; ?>
 <?php endif; ?>
 </div>
+
+<script>
+	const year = new Date().getFullYear();
+	document.querySelector('footer .copyright_wrap p').innerHTML = `&copy; ${year} Mi Vidimo. Sva prava pridržana.`;
+</script>
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/js/jquery.easing.min.js"></script>

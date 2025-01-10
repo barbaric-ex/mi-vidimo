@@ -199,169 +199,219 @@
 
   /*****************************************/
 
-  document.addEventListener("DOMContentLoaded", function () {
-    // Provjera podržava li preglednik Web Speech API
-    if ("webkitSpeechRecognition" in window && "speechSynthesis" in window) {
-      const recognition = new webkitSpeechRecognition();
-      const synth = window.speechSynthesis; // SpeechSynthesis API
-      recognition.lang = "hr-HR"; // Postavi jezik na hrvatski
-      recognition.continuous = true; // Pokušava slušati kontinuirano
-      recognition.interimResults = false;
+  // document.addEventListener("DOMContentLoaded", function () {
+  //   // Provjera podržava li preglednik Web Speech API
+  //   if ("webkitSpeechRecognition" in window && "speechSynthesis" in window) {
+  //     const recognition = new webkitSpeechRecognition();
+  //     const synth = window.speechSynthesis; // SpeechSynthesis API
+  //     recognition.lang = "hr-HR"; // Postavi jezik na hrvatski
+  //     recognition.continuous = true; // Pokušava slušati kontinuirano
+  //     recognition.interimResults = false;
 
-      let isListening = false;
+  //     let isListening = false;
 
-      // Funkcija za pokretanje/zaustavljanje mikrofona
-      function toggleVoiceNavigation() {
-        const btnText = document.querySelector(".inner_btn span");
-        const innerBtn = document.querySelector(".inner_btn");
+  //     // Funkcija za pokretanje/zaustavljanje mikrofona
+  //     function toggleVoiceNavigation() {
+  //       const btnText = document.querySelector(".inner_btn span");
+  //       const innerBtn = document.querySelector(".inner_btn");
 
-        if (isListening) {
-          recognition.stop();
-          isListening = false;
-          btnText.textContent = "Upali glasovnu navigaciju";
-          innerBtn.classList.remove("active");
-        } else {
-          try {
-            recognition.start();
-            isListening = true;
-            btnText.textContent = "Ugasi glasovnu navigaciju";
-            innerBtn.classList.add("active");
-          } catch (error) {
-            console.error(
-              "Došlo je do greške prilikom pokretanja prepoznavanja glasa:",
-              error
-            );
-            alert(
-              "Došlo je do greške prilikom pokretanja prepoznavanja glasa. Molimo pokušajte ponovno."
-            );
-          }
-        }
-      }
+  //       if (isListening) {
+  //         recognition.stop();
+  //         isListening = false;
+  //         btnText.textContent = "Upali glasovnu navigaciju";
+  //         innerBtn.classList.remove("active");
+  //       } else {
+  //         try {
+  //           recognition.start();
+  //           isListening = true;
+  //           btnText.textContent = "Ugasi glasovnu navigaciju";
+  //           innerBtn.classList.add("active");
+  //         } catch (error) {
+  //           console.error(
+  //             "Došlo je do greške prilikom pokretanja prepoznavanja glasa:",
+  //             error
+  //           );
+  //           alert(
+  //             "Došlo je do greške prilikom pokretanja prepoznavanja glasa. Molimo pokušajte ponovno."
+  //           );
+  //         }
+  //       }
+  //     }
 
-      // Obradi glasovne naredbe
-      recognition.onresult = function (event) {
-        const transcript = event.results[event.results.length - 1][0].transcript
-          .trim()
-          .toLowerCase();
+  //     // Obradi glasovne naredbe
+  //     recognition.onresult = function (event) {
+  //       const transcript = event.results[event.results.length - 1][0].transcript
+  //         .trim()
+  //         .toLowerCase();
 
-        // Glasovne naredbe
-        if (
-          [
-            "novosti",
-            "vijesti",
-            "novost",
-            "vijest",
-            "zadnje vijesti",
-            "zadnje novosti",
-          ].includes(transcript)
-        ) {
-          document
-            .getElementById("novosti")
-            .scrollIntoView({ behavior: "smooth" });
-        } else if (["o nama", "naš tim", "tim"].includes(transcript)) {
-          document
-            .getElementById("onama")
-            .scrollIntoView({ behavior: "smooth" });
-        } else if (
-          [
-            "događaji",
-            "eventi",
-            "događanja",
-            "kalendar",
-            "skori događaji",
-          ].includes(transcript)
-        ) {
-          document
-            .getElementById("events")
-            .scrollIntoView({ behavior: "smooth" });
-        } else if (
-          ["mapa", "karta", "lokacija", "gdje se nalazimo"].includes(transcript)
-        ) {
-          document
-            .getElementById("lokacija")
-            .scrollIntoView({ behavior: "smooth" });
-        } else if (
-          [
-            "kontakt",
-            "info",
-            "adresa",
-            "broj telefona",
-            "email adresa",
-            "društvene mreže",
-            "socijalne mreže",
-          ].includes(transcript)
-        ) {
-          document
-            .getElementById("footer")
-            .scrollIntoView({ behavior: "smooth" });
-        } else if (
-          [
-            "početna",
-            "početak",
-            "vrh stranice",
-            "vrati na vrh",
-            "vrati na početak",
-            "početna stranica",
-          ].includes(transcript)
-        ) {
-          document
-            .getElementById("pocetna")
-            .scrollIntoView({ behavior: "smooth" });
-        } else if (
-          [
-            "pozovi",
-            "zovni",
-            "zovi",
-            "okreni broj",
-            "kontaktiraj",
-            "pozovi broj telefona",
-          ].includes(transcript)
-        ) {
-          document.querySelector(".linkovi .tel").click();
-        } else if (
-          ["pošalji email", "email", "mail", "pošalji poruku"].includes(
-            transcript
-          )
-        ) {
-          document.querySelector(".linkovi .email").click();
-        } else if (transcript === "instagram") {
-          document.querySelector(".instagram").click();
-        } else if (transcript === "facebook") {
-          document.querySelector(".facebook").click();
-        } else if (transcript === "youtube") {
-          document.querySelector(".youtube").click();
-        }
-      };
+  //       // Glasovne naredbe
+  //       if (
+  //         [
+  //           "novosti",
+  //           "vijesti",
+  //           "novost",
+  //           "vijest",
+  //           "zadnje vijesti",
+  //           "zadnje novosti",
+  //         ].includes(transcript)
+  //       ) {
+  //         document
+  //           .getElementById("novosti")
+  //           .scrollIntoView({ behavior: "smooth" });
+  //       } else if (["o nama", "naš tim", "tim"].includes(transcript)) {
+  //         document
+  //           .getElementById("onama")
+  //           .scrollIntoView({ behavior: "smooth" });
+  //       } else if (
+  //         [
+  //           "događaji",
+  //           "eventi",
+  //           "događanja",
+  //           "kalendar",
+  //           "skori događaji",
+  //         ].includes(transcript)
+  //       ) {
+  //         document
+  //           .getElementById("events")
+  //           .scrollIntoView({ behavior: "smooth" });
+  //       } else if (
+  //         ["mapa", "karta", "lokacija", "gdje se nalazimo"].includes(transcript)
+  //       ) {
+  //         document
+  //           .getElementById("lokacija")
+  //           .scrollIntoView({ behavior: "smooth" });
+  //       } else if (
+  //         [
+  //           "kontakt",
+  //           "info",
+  //           "adresa",
+  //           "broj telefona",
+  //           "email adresa",
+  //           "društvene mreže",
+  //           "socijalne mreže",
+  //         ].includes(transcript)
+  //       ) {
+  //         document
+  //           .getElementById("footer")
+  //           .scrollIntoView({ behavior: "smooth" });
+  //       } else if (
+  //         [
+  //           "početna",
+  //           "početak",
+  //           "vrh stranice",
+  //           "vrati na vrh",
+  //           "vrati na početak",
+  //           "početna stranica",
+  //         ].includes(transcript)
+  //       ) {
+  //         document
+  //           .getElementById("pocetna")
+  //           .scrollIntoView({ behavior: "smooth" });
+  //       } else if (
+  //         [
+  //           "pozovi",
+  //           "zovni",
+  //           "zovi",
+  //           "okreni broj",
+  //           "kontaktiraj",
+  //           "pozovi broj telefona",
+  //         ].includes(transcript)
+  //       ) {
+  //         document.querySelector(".linkovi .tel").click();
+  //       } else if (
+  //         ["pošalji email", "email", "mail", "pošalji poruku"].includes(
+  //           transcript
+  //         )
+  //       ) {
+  //         document.querySelector(".linkovi .email").click();
+  //       } else if (transcript === "instagram") {
+  //         document.querySelector(".instagram").click();
+  //       } else if (transcript === "facebook") {
+  //         document.querySelector(".facebook").click();
+  //       } else if (transcript === "youtube") {
+  //         document.querySelector(".youtube").click();
+  //       }
+  //     };
 
-      // Ako se prepoznavanje zaustavi, pokušaj ga ponovo pokrenuti
-      recognition.onend = function () {
-        if (isListening) {
-          recognition.start();
-        }
-      };
+  //     // Ako se prepoznavanje zaustavi, pokušaj ga ponovo pokrenuti
+  //     recognition.onend = function () {
+  //       if (isListening) {
+  //         recognition.start();
+  //       }
+  //     };
 
-      // Obradi greške
-      recognition.onerror = function (event) {
-        console.error("Greška u prepoznavanju glasa:", event.error);
-        if (
-          event.error === "not-allowed" ||
-          event.error === "service-not-allowed"
-        ) {
-          alert(
-            "Pristup mikrofonu je odbijen ili nije dostupan. Molimo provjerite postavke."
-          );
-        }
-      };
+  //     // Obradi greške
+  //     recognition.onerror = function (event) {
+  //       console.error("Greška u prepoznavanju glasa:", event.error);
+  //       if (
+  //         event.error === "not-allowed" ||
+  //         event.error === "service-not-allowed"
+  //       ) {
+  //         alert(
+  //           "Pristup mikrofonu je odbijen ili nije dostupan. Molimo provjerite postavke."
+  //         );
+  //       }
+  //     };
 
-      // Dodaj event listener za klik na dugme
-      const voiceOpenBtn = document.querySelector(".voice_open_btn");
-      if (voiceOpenBtn) {
-        voiceOpenBtn.addEventListener("click", toggleVoiceNavigation);
-      } else {
-        console.warn("Element s klasom .voice_open_btn nije pronađen.");
-      }
-    } else {
-      alert("Vaš preglednik ne podržava glasovnu navigaciju.");
-    }
+  //     // Dodaj event listener za klik na dugme
+  //     const voiceOpenBtn = document.querySelector(".voice_open_btn");
+  //     if (voiceOpenBtn) {
+  //       voiceOpenBtn.addEventListener("click", toggleVoiceNavigation);
+  //     } else {
+  //       console.warn("Element s klasom .voice_open_btn nije pronađen.");
+  //     }
+  //   } else {
+  //     alert("Vaš preglednik ne podržava glasovnu navigaciju.");
+  //   }
+  // });
+
+  //////////////////////////////////////////////back color changing scroll
+
+  document.addEventListener("scroll", function () {
+    const scrollPosition = window.scrollY;
+    const documentHeight = document.body.scrollHeight - window.innerHeight;
+    const scrollPercentage = scrollPosition / documentHeight;
+
+    const colors = [
+      "#daddd8",
+      "#d5e7c8",
+      "#d3f2bc",
+      "#9ae4e5",
+      "#88eff1",
+      "#5cf2f5",
+    ];
+
+    const colorIndex = Math.floor(scrollPercentage * (colors.length - 1));
+    const nextColorIndex =
+      colorIndex + 1 < colors.length ? colorIndex + 1 : colorIndex;
+
+    const color1 = colors[colorIndex];
+    const color2 = colors[nextColorIndex];
+
+    const colorTransitionPercentage =
+      (scrollPercentage * (colors.length - 1)) % 1;
+
+    const newColor = blendColors(color1, color2, colorTransitionPercentage);
+
+    document.body.style.backgroundColor = newColor;
   });
+
+  function blendColors(color1, color2, percentage) {
+    const [r1, g1, b1] = hexToRgb(color1);
+    const [r2, g2, b2] = hexToRgb(color2);
+
+    const r = Math.round(r1 + percentage * (r2 - r1));
+    const g = Math.round(g1 + percentage * (g2 - g1));
+    const b = Math.round(b1 + percentage * (b2 - b1));
+
+    return `rgb(${r}, ${g}, ${b})`;
+  }
+
+  function hexToRgb(hex) {
+    const bigint = parseInt(hex.slice(1), 16);
+    const r = (bigint >> 16) & 255;
+    const g = (bigint >> 8) & 255;
+    const b = bigint & 255;
+    return [r, g, b];
+  }
 })(jQuery);

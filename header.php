@@ -23,6 +23,17 @@
 	<meta property="og:image" itemprop="image" content="<?php echo get_template_directory_uri(); ?>/img/og-img.jpg">
 	<meta property="og:type" content="website" />
 
+	<!-- Schema.org for SEO -->
+	<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@type": "Organization",
+			"url": "<?php echo home_url(); ?>",
+			"name": "<?php echo get_bloginfo('name'); ?>",
+			"logo": "<?php echo get_template_directory_uri(); ?>/img/logo1-removebg-preview.png"
+		}
+	</script>
+
 	<?php wp_head() ?>
 
 	<script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
@@ -32,14 +43,14 @@
 <body id="page-top" <?php body_class(); ?>>
 	<div class="page-wrap">
 
-		<?php if (is_front_page()) : ?>
+		<!-- <?php if (is_front_page()) : ?>
 			<div class="voice_open_btn">
 				<div class="inner_btn">
 					<span>Upali glasovnu navigaciju</span>
 					<img src="<?php echo get_template_directory_uri(); ?>/img/free-microphone-icon-342-thumb.png" alt="">
 				</div>
 			</div>
-		<?php endif; ?>
+		<?php endif; ?> -->
 
 		<?php if (have_rows('footer', 'options')) : ?>
 			<?php while (have_rows('footer', 'options')) : the_row();
@@ -98,7 +109,7 @@
 		<nav class="navbar navbar-expand-lg navbar-default fixed-top " id="mainNav">
 			<div class="container">
 				<div class="menu-btn"><button class="c-hamburger c-hamburger--htx"><span>toggle menu</span> </button></div>
-				<div class="logo animsition-link"><a href="<?php echo home_url(); ?>"><img src="<?php echo get_template_directory_uri(); ?>/img/logo_main.png" alt="Name"></a></div>
+				<div class="logo animsition-link"><a href="<?php echo home_url(); ?>"><img src="<?php echo get_template_directory_uri(); ?>/img/logo_main2.png" alt="Name"></a></div>
 				<div class="collapse navbar-collapse " id="navbarResponsive">
 
 					<div class="right_logo_inner">
@@ -120,7 +131,7 @@
 
 					<div class="search-wrap search-big-wrap">
 						<form role="search" method="get" id="searchform" class="searchform" action="/">
-							<input type="text" name="s" placeholder="Pretraži">
+							<input type="text" name="s" placeholder="Pretraži novosti">
 							<div class="search-icon">
 								<img src="<?php echo get_template_directory_uri(); ?>/img/menue-bar-loupe-white.svg">
 
